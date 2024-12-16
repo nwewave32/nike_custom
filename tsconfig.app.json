@@ -30,7 +30,8 @@
       "hooks/*": ["hooks/*"],
       "pages/*": ["pages/*"],
       "services/*": ["services/*"],
-      "store/*": ["store/*"]
+      "store/*": ["store/*"],
+      "styles/*": ["styles/*"]
     }
   },
   "include": ["src", "backend"]

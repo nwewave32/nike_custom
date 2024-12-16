@@ -1,38 +1,264 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
+import { colorSet } from "styles/ColorSet";
+
+import { IconSvg } from "styles/GlobalStyle";
+import FlexBox from "./FlexBox";
 
 const FooterWrapper = styled.footer`
-  padding: 20px;
-  background-color: #222;
-  color: #fff;
-  text-align: center;
+  padding: 48px;
+  background-color: ${colorSet.primaryOnDark};
 `;
 
-const FooterText = styled.p`
-  margin: 10px 0;
-  font-size: 0.9rem;
+const FooterMenuWrapper = styled(FlexBox)`
+  gap: 12px;
+`;
+const FooterMenuCol = styled(FlexBox)`
+  flex: 1;
+  gap: 12px;
 `;
 
+const FooterMenuH2 = styled.h2`
+  font:
+    500 0.875rem/1.75 "Noto Sans KR Medium",
+    Helvetica,
+    Arial,
+    "Apple SD Gothic Neo",
+    "Apple SD 산돌고딕 Neo",
+    "Malgun Gothic",
+    "맑은 고딕",
+    sans-serif;
+  margin-bottom: 12px;
+`;
+
+const FooterLink = styled.a`
+  list-style: none;
+  color: ${colorSet.hoverColor};
+  font:
+    500 0.875rem/1.75 "Noto Sans KR Medium",
+    Helvetica,
+    Arial,
+    "Apple SD Gothic Neo",
+    "Apple SD 산돌고딕 Neo",
+    "Malgun Gothic",
+    "맑은 고딕",
+    sans-serif;
+`;
+
+interface FooterSpacerProps {
+  margin?: string;
+  border?: string;
+}
+
+const border = ({ border }: FooterSpacerProps) => {
+  if (border) {
+    const borderArr = border.split(" ");
+    const height = borderArr[0];
+    const color = borderArr[1];
+    return `height: ${height}; width: 100%; background-color: ${color};`;
+  } else return "";
+};
+const shouldForwardProp = (prop: string) =>
+  !["margin", "border"].includes(prop);
+
+const FooterSpace = styled.div.withConfig({
+  shouldForwardProp,
+})<FooterSpacerProps>`
+  ${({ margin }) => (margin ? margin : "")};
+  ${border}
+`;
+
+const FooterSpacer = forwardRef<HTMLDivElement, FooterSpacerProps>(
+  ({ margin, border, ...rest }) => {
+    return <FooterSpace margin={margin} border={border} {...rest} />;
+  }
+);
+const LanguageButtonWrapper = styled(FlexBox)`
+  font:
+    500 0.875rem/1.75 "Noto Sans KR Medium",
+    Helvetica,
+    Arial,
+    "Apple SD Gothic Neo",
+    "Apple SD 산돌고딕 Neo",
+    "Malgun Gothic",
+    "맑은 고딕",
+    sans-serif;
+  color: ${colorSet.hoverColor};
+  gap: 4px;
+`;
+
+const SubFooter = styled(FlexBox)`
+  padding-bottom: 48px;
+  gap: 24px;
+  font:
+    500 0.875rem/1.75 "Noto Sans KR Medium",
+    Helvetica,
+    Arial,
+    "Apple SD Gothic Neo",
+    "Apple SD 산돌고딕 Neo",
+    "Malgun Gothic",
+    "맑은 고딕",
+    sans-serif;
+  color: ${colorSet.hoverColor};
+`;
+
+const SubFooterSpan = styled.span`
+  color: ${colorSet.hoverColor};
+`;
+
+const LegalFooterContainer = styled(FlexBox)`
+  gap: 12px;
+  height: max-content;
+`;
+
+const LegalFooterWrapper = styled.div`
+  width: 50%;
+  font-size: 14px;
+  color: ${colorSet.hoverColor};
+  line-height: 1.75;
+`;
+
+const menuItems = [
+  {
+    id: 0,
+    title: "안내",
+    list: ["멤버가입", "매장찾기", "나이키 저널"],
+  },
+  {
+    id: 1,
+    title: "고객센터",
+    list: ["주문배송조회", "반품정책", "결제 방법", "공지사항", "문의하기"],
+  },
+  {
+    id: 2,
+    title: "회사소개",
+    list: ["About Nike", "소식", "채용", "투자자", "지속가능성", "신고하기"],
+  },
+];
 const Footer: React.FC = () => {
   return (
     <FooterWrapper>
-      <FooterText>&copy; 2024 Nike, Inc. All Rights Reserved.</FooterText>
-      <FooterText>
-        Follow us on:
-        <a
-          href="https://www.instagram.com/nike"
-          style={{ color: "#fff", marginLeft: "10px" }}
-        >
-          Instagram
-        </a>{" "}
-        |
-        <a
-          href="https://twitter.com/nike"
-          style={{ color: "#fff", marginLeft: "10px" }}
-        >
-          Twitter
-        </a>
-      </FooterText>
+      <FooterSpacer
+        margin="margin-bottom: 60px"
+        border={`1px ${colorSet.background3}`}
+      />
+      <FooterMenuWrapper align="flex-start">
+        {menuItems.map((menu, idx) => (
+          <FooterMenuCol
+            key={idx + menu.title}
+            direction="column"
+            align="flex-start"
+            justify="flex-start"
+          >
+            <FooterMenuH2 key={menu.id}>{menu.title}</FooterMenuH2>
+            {menu.list.map((item) => (
+              <FooterLink key={item}>
+                <p>{item}</p>
+              </FooterLink>
+            ))}
+          </FooterMenuCol>
+        ))}
+
+        <FooterMenuCol justify="flex-end">
+          <LanguageButtonWrapper>
+            <IconSvg width={16}>
+              <path
+                stroke="currentColor"
+                strokeMiterlimit="10"
+                strokeWidth="1.5"
+                d="M21.75 12A9.75 9.75 0 0112 21.75M21.75 12A9.75 9.75 0 0012 2.25M21.75 12c0 2.071-4.365 3.75-9.75 3.75S2.25 14.071 2.25 12m19.5 0c0-2.071-4.365-3.75-9.75-3.75S2.25 9.929 2.25 12M12 21.75A9.75 9.75 0 012.25 12M12 21.75c2.9 0 5.25-4.365 5.25-9.75S14.9 2.25 12 2.25m0 19.5c-2.9 0-5.25-4.365-5.25-9.75S9.1 2.25 12 2.25M2.25 12A9.75 9.75 0 0112 2.25"
+              ></path>
+            </IconSvg>
+            <span>대한민국</span>
+          </LanguageButtonWrapper>
+        </FooterMenuCol>
+      </FooterMenuWrapper>
+      <FooterSpacer margin="margin-bottom: 72px" />
+      <SubFooter aria-label="sub footer">
+        <p>
+          <SubFooterSpan>© 2024 Nike, Inc. All Rights Reserved</SubFooterSpan>
+        </p>
+        {[
+          "이용약관",
+          "개인정보처리방침",
+          "위치정보이용약관",
+          "영상정보처리기기 운영 방침",
+        ].map((item) => (
+          <a data-testid="link" href="#" key={item}>
+            <SubFooterSpan>{item}</SubFooterSpan>
+          </a>
+        ))}
+      </SubFooter>
+      <FooterSpacer
+        margin="margin-bottom: 24px; margin-top: 24px"
+        border={`1px ${colorSet.background3}`}
+      />
+      <LegalFooterContainer align="flex-start">
+        <LegalFooterWrapper>
+          <p>
+            <span>
+              (유)나이키코리아 대표 Kimberlee Lynn Chang Mendes, 킴벌리 린 창
+              멘데스 | 서울 강남구 테헤란로 152 강남파이낸스센터 30층 |
+              통신판매업신고번호 2011-서울강남-03461 | 등록번호 220-88-09068
+            </span>
+            <a
+              data-var="koreanBusinessInfoLink"
+              target="_blank"
+              data-testid="link"
+              href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2208809068"
+            >
+              사업자 정보 확인
+            </a>
+          </p>
+          <p>
+            <span>
+              고객센터 전화 문의
+              <a
+                data-var="koreanCustomerServicePhone"
+                data-testid="link"
+                href="tel:080-022-0182"
+              >
+                080-022-0182
+              </a>
+              FAX 02-6744-5880 | 이메일
+              <a
+                data-var="koreanCustomerServiceEmail"
+                data-testid="link"
+                href="mailto:service@nike.co.kr"
+              >
+                service@nike.co.kr
+              </a>
+              | 호스팅서비스사업자 (유)나이키코리아
+            </span>
+          </p>
+        </LegalFooterWrapper>
+        <LegalFooterWrapper>
+          <p>
+            <span>
+              현금 등으로 결제 시 안전 거래를 위해 나이키 쇼핑몰에서 가입하신
+              한국결제네트웍스 유한회사의 구매안전 서비스(
+              <button
+                type="submit"
+                data-var="koreanSecurePaymentIcon"
+                data-testid="link"
+              >
+                결제대금예치
+              </button>
+              )를 이용하실 수 있습니다.
+            </span>
+          </p>
+          <p>
+            콘텐츠산업진흥법에 의한 콘텐츠 보호 안내
+            <button
+              type="submit"
+              data-var="koreanContentProtectionBtn"
+              data-testid="link"
+            >
+              자세히 보기
+            </button>
+          </p>
+        </LegalFooterWrapper>
+      </LegalFooterContainer>
     </FooterWrapper>
   );
 };

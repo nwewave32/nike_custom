@@ -1,17 +1,18 @@
+import MainBanner from "components/MainBanner";
+import TrendingNow from "components/TrendingNow";
 import styled from "styled-components";
+import { colorSet } from "styles/ColorSet";
 
 const MainContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: pink;
+  background-color: ${colorSet.primaryOnDark};
 `;
 
 function MainPage() {
   return (
-    <>
-      <MainContainer>hihi</MainContainer>
-      <MainContainer>hihi</MainContainer>
-    </>
+    <MainContainer>
+      <MainBanner />
+      <TrendingNow />
+    </MainContainer>
   );
 }
 

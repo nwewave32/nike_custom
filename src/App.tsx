@@ -1,4 +1,5 @@
 import FlexBox from "components/FlexBox";
+import TestPage from "pages/TestPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "./components/Footer";
@@ -24,6 +25,7 @@ function App() {
           <MainContainer>
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/test" element={<TestPage />} />
             </Routes>
           </MainContainer>
         </AppContainer>
