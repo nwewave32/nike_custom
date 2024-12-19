@@ -79,7 +79,66 @@ input:active {
   }
 }
 
-   
+   :root {
+    --podium-cds-typography-320-to-959-oversize1: 500 6rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-oversize2: 500 4.75rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-oversize3: 500 3.75rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-display1: 900 3rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-display2: 900 2.5rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-display3: 900 2rem/1.25 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-display4: 900 1.5rem/1.25 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-conversation1: 300 2rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-conversation2: 300 1.5rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-conversation3: 300 1.25rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-conversation4: 300 1rem/1.25 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-editorial-body1: 400 1rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-959-editorial-body1-strong: 500 1rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-1919-title1: 500 2.5rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-1919-title2: 500 2rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-1919-title3: 500 1.5rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-320-to-1919-title4: 500 1.25rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1439-oversize1: 500 7.5rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1439-oversize2: 500 6rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1439-oversize3: 500 4.75rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-display1: 900 6rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-display2: 900 4.75rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-display3: 900 3.75rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-display4: 900 3rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-conversation1: 300 3rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-conversation2: 300 2.5rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-conversation3: 300 2rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-to-1919-conversation4: 300 1.25rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-plus-editorial-body1: 400 1.25rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-960-plus-editorial-body1-strong: 500 1.25rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1440-to-1919-oversize1: 500 9.375rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1440-to-1919-oversize2: 500 7.5rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1440-to-1919-oversize3: 500 6rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-oversize1: 500 11.625rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-oversize2: 500 9.375rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-oversize3: 500 7.5rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-display1: 900 7.5rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-display2: 900 6rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-display3: 900 4.75rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-display4: 900 3.75rem/1.2 'Noto Sans KR Black',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-title1: 500 3rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-title2: 500 2.5rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-title3: 500 2rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-title4: 500 1.5rem/1.5 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-conversation1: 300 3.75rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-conversation2: 300 3rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-conversation3: 300 2.5rem/1.5 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-1920-plus-conversation4: 300 1.25rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body1: 400 1rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body1-strong: 500 1rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body2: 400 .875rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body2-strong: 500 .875rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body3: 400 .75rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body3-strong: 500 .75rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body4: 400 .625rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-body4-strong: 500 .625rem/1.75 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+    --podium-cds-typography-legal: 400 .875rem/1.75 'Noto Sans KR',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
+}
+
 `;
 
 export const SwooshSvg = styled.svg`
@@ -123,15 +182,7 @@ export const IconSvg = forwardRef<SVGSVGElement, IconSvgProps>(
 );
 
 export const SubTitle = styled.p`
-  font:
-    500 1rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-body1-strong);
   margin-bottom: 8px;
   color: ${colorSet.title};
 `;
@@ -144,39 +195,15 @@ export const Title = styled.h3`
 `;
 
 export const ItemTitle = styled.h3`
-  font:
-    500 1.5rem/1.5 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-320-to-1919-title3);
   color: ${colorSet.primaryOnDark};
 `;
 
 export const Paragraph = styled.p`
-  font:
-    400 1rem / 1.75 "Noto Sans KR",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-320-to-959-editorial-body1-strong);
 `;
 
 export const SectionTitle = styled.h2`
-  font:
-    500 1.5rem/1.5 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-320-to-1919-title3);
   color: ${colorSet.title};
 `;

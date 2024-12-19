@@ -19,30 +19,14 @@ const FooterMenuCol = styled(FlexBox)`
 `;
 
 const FooterMenuH2 = styled.h2`
-  font:
-    500 0.875rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-body2-strong);
   margin-bottom: 12px;
 `;
 
 const FooterLink = styled.a`
   list-style: none;
   color: ${colorSet.hoverColor};
-  font:
-    500 0.875rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-body2-strong);
 `;
 
 interface FooterSpacerProps {
@@ -74,15 +58,7 @@ const FooterSpacer = forwardRef<HTMLDivElement, FooterSpacerProps>(
   }
 );
 const LanguageButtonWrapper = styled(FlexBox)`
-  font:
-    500 0.875rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-body2-strong);
   color: ${colorSet.hoverColor};
   gap: 4px;
 `;
@@ -90,15 +66,8 @@ const LanguageButtonWrapper = styled(FlexBox)`
 const SubFooter = styled(FlexBox)`
   padding-bottom: 48px;
   gap: 24px;
-  font:
-    500 0.875rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+
+  font: var(--podium-cds-typography-body2-strong);
   color: ${colorSet.hoverColor};
 `;
 
@@ -116,6 +85,22 @@ const LegalFooterWrapper = styled.div`
   font-size: 14px;
   color: ${colorSet.hoverColor};
   line-height: 1.75;
+`;
+
+const LegalFooterAnchor = styled.a`
+  text-decoration: underline;
+  margin: 0 5px;
+  &:focus {
+    outline: 0;
+  }
+`;
+
+const LegalFooterButton = styled.button`
+  text-decoration: underline;
+  cursor: pointer;
+  &:focus {
+    outline: 0;
+  }
 `;
 
 const menuItems = [
@@ -201,33 +186,33 @@ const Footer: React.FC = () => {
               멘데스 | 서울 강남구 테헤란로 152 강남파이낸스센터 30층 |
               통신판매업신고번호 2011-서울강남-03461 | 등록번호 220-88-09068
             </span>
-            <a
+            <LegalFooterAnchor
               data-var="koreanBusinessInfoLink"
               target="_blank"
               data-testid="link"
-              href="https://www.ftc.go.kr/bizCommPop.do?wrkr_no=2208809068"
+              href="#"
             >
               사업자 정보 확인
-            </a>
+            </LegalFooterAnchor>
           </p>
           <p>
             <span>
               고객센터 전화 문의
-              <a
+              <LegalFooterAnchor
                 data-var="koreanCustomerServicePhone"
                 data-testid="link"
-                href="tel:080-022-0182"
+                href="#"
               >
                 080-022-0182
-              </a>
+              </LegalFooterAnchor>
               FAX 02-6744-5880 | 이메일
-              <a
+              <LegalFooterAnchor
                 data-var="koreanCustomerServiceEmail"
                 data-testid="link"
-                href="mailto:service@nike.co.kr"
+                href="mailto:nwewave.32@gmail.com"
               >
                 service@nike.co.kr
-              </a>
+              </LegalFooterAnchor>
               | 호스팅서비스사업자 (유)나이키코리아
             </span>
           </p>
@@ -237,25 +222,26 @@ const Footer: React.FC = () => {
             <span>
               현금 등으로 결제 시 안전 거래를 위해 나이키 쇼핑몰에서 가입하신
               한국결제네트웍스 유한회사의 구매안전 서비스(
-              <button
+              <LegalFooterButton
                 type="submit"
                 data-var="koreanSecurePaymentIcon"
                 data-testid="link"
               >
                 결제대금예치
-              </button>
+              </LegalFooterButton>
               )를 이용하실 수 있습니다.
             </span>
           </p>
           <p>
             콘텐츠산업진흥법에 의한 콘텐츠 보호 안내
-            <button
+            <LegalFooterButton
               type="submit"
               data-var="koreanContentProtectionBtn"
               data-testid="link"
+              style={{ marginLeft: "5px" }}
             >
               자세히 보기
-            </button>
+            </LegalFooterButton>
           </p>
         </LegalFooterWrapper>
       </LegalFooterContainer>

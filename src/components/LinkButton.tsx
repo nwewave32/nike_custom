@@ -17,15 +17,7 @@ const shouldForwardProp = (prop: string) => !["mode"].includes(prop);
 const LinkButtonContainer = styled.a.withConfig({
   shouldForwardProp,
 })<Omit<LinkButtonProps, "text">>`
-  font:
-    500 1rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-body1-strong);
   padding: 6px 16px;
   border: none;
   border-radius: 30px;

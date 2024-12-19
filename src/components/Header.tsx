@@ -185,15 +185,7 @@ const UserMenuLi = styled.li`
   }
 `;
 const UserMenu = styled.p`
-  font:
-    500 0.75rem/1.75 "Noto Sans KR Medium",
-    Helvetica,
-    Arial,
-    "Apple SD Gothic Neo",
-    "Apple SD 산돌고딕 Neo",
-    "Malgun Gothic",
-    "맑은 고딕",
-    sans-serif;
+  font: var(--podium-cds-typography-body3-strong);
 `;
 const TopBar = () => {
   return (
