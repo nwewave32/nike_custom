@@ -1,6 +1,6 @@
 import { useScrollDirection } from "hooks/useScrollDirection";
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { IconSvg, SwooshLink, SwooshSvg } from "styles/GlobalStyle";
 import FlexBox from "./FlexBox";
 import SearchBar from "./SearchBar";
@@ -13,17 +13,24 @@ interface HeaderWrapperProps {
 const shouldForwardProp = (prop: string) =>
   !["curScrollTop", "isScrollUp"].includes(prop);
 
-const transition = ({ curScrollTop, isScrollUp }: HeaderWrapperProps) => {
-  const isTopBarShow = curScrollTop < 60;
+// const transition = ({ curScrollTop, isScrollUp }: HeaderWrapperProps) => {
+//   const isTopBarShow = curScrollTop < 60;
 
-  return `
-    position: ${curScrollTop > 100 && isScrollUp ? "fixed" : "relative"};
-    top: 0;
-    ${isTopBarShow ? "" : "transition: transform 1.5s ease;"}
-    transform: translateY(${isTopBarShow || isScrollUp ? 0 : "-60px"});
-    z-index:2;
-  `;
-};
+//   return `
+//     position: ${curScrollTop > 100 && isScrollUp ? "fixed" : "relative"};
+//     top: 0;
+//     ${isTopBarShow ? "" : "transition: transform 1.5s ease;"}
+//     transform: translateY(${isTopBarShow || isScrollUp ? 0 : "-60px"});
+//     z-index:2;
+//   `;
+// };
+const transition = ({ curScrollTop, isScrollUp }: HeaderWrapperProps) => css`
+  position: ${curScrollTop > 100 && isScrollUp ? "fixed" : "relative"};
+  top: 0;
+  transition: ${curScrollTop < 60 ? "" : "transform 1.5s ease"};
+  transform: translateY(${curScrollTop < 60 || isScrollUp ? 0 : "-60px"});
+  z-index: 2;
+`;
 
 const HeaderWrapper = styled.header.withConfig({
   shouldForwardProp,
@@ -33,25 +40,51 @@ const HeaderWrapper = styled.header.withConfig({
   align-items: center;
   width: 100vw;
   box-sizing: border-box;
-  overflow: hidden;
+
   padding: 0 48px; //todo: responsive
   background-color: #fff;
   ${transition};
 `;
 
 const Nav = styled.nav`
-  display: flex;
-  gap: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 48px; //todo: responsive
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+`;
+
+const NavWrapper = styled(FlexBox)`
+  height: 100%;
+`;
+
+const NavLinkWrapper = styled(FlexBox)`
+  padding: 0 12px;
+
+  height: 100%;
 `;
 
 const NavLink = styled.a`
   font-weight: 500;
 
+  line-height: 1.5;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   &:hover {
     border-bottom: 2px solid #000;
   }
+`;
+
+const HoverContainer = styled.div`
+  position: absolute;
+  bottom: -100vh;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
 `;
 
 const IconContainer = styled.a`
@@ -72,6 +105,19 @@ const Header: React.FC = () => {
   const [isTopBarShow, setIsTopBarShow] = React.useState<boolean>(true);
   const [isScrollUp, setIsScrollUp] = React.useState<boolean>(true);
 
+  const [isHover, setIsHover] = React.useState<boolean>(false);
+
+  const handleMouseEvent: React.MouseEventHandler<HTMLDivElement> = (event) => {
+    if (event.type === "mouseenter" && !isHover) {
+      setIsHover(true);
+    } else if (event.type === "mouseleave" && isHover) {
+      setIsHover(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log("##isHover", isHover);
+  }, [isHover]);
   useScrollDirection(
     () => {
       setIsScrollUp(false);
@@ -123,11 +169,28 @@ const Header: React.FC = () => {
           </SwooshSvg>
         </SwooshLink>
         <Nav>
-          <NavLink>New</NavLink>
-          <NavLink>Men</NavLink>
-          <NavLink>Women</NavLink>
-          <NavLink>Kids</NavLink>
-          <NavLink>Sale</NavLink>
+          <NavWrapper
+            justify="center"
+            onMouseEnter={handleMouseEvent}
+            onMouseLeave={handleMouseEvent}
+          >
+            <NavLinkWrapper>
+              <NavLink>New</NavLink>
+            </NavLinkWrapper>
+            <NavLinkWrapper>
+              <NavLink>Men</NavLink>
+            </NavLinkWrapper>
+            <NavLinkWrapper>
+              <NavLink>Women</NavLink>
+            </NavLinkWrapper>
+            <NavLinkWrapper>
+              <NavLink>Kids</NavLink>
+            </NavLinkWrapper>
+            <NavLinkWrapper>
+              <NavLink>Sale</NavLink>
+            </NavLinkWrapper>
+            {isHover && <HoverContainer>?????</HoverContainer>}
+          </NavWrapper>
         </Nav>
 
         <UserToolWrapper>

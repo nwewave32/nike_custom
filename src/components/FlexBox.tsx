@@ -1,7 +1,7 @@
-import { forwardRef, ReactNode } from "react";
+import { forwardRef, HTMLProps, ReactNode } from "react";
 import styled from "styled-components";
 
-interface FlexBoxProps {
+interface FlexBoxProps extends HTMLProps<HTMLDivElement> {
   children?: ReactNode;
   direction?: "row" | "column";
   align?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
