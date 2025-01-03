@@ -62,7 +62,6 @@ const NavWrapper = styled(FlexBox)`
 
 const NavLinkWrapper = styled(FlexBox)`
   padding: 0 12px;
-
   height: 100%;
 `;
 
@@ -80,11 +79,21 @@ const NavLink = styled.a`
 const HoverContainer = styled.div`
   position: absolute;
   bottom: -100vh;
-  left: 0;
+  left: -48px;
   z-index: 2;
   width: 100%;
   height: 100vh;
+`;
+
+const HoverNav = styled.div`
+  width: 100vw;
   background-color: #fff;
+`;
+
+const HoverEmpty = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const IconContainer = styled.a`
@@ -99,6 +108,77 @@ const IconWrapper = styled(FlexBox)`
 `;
 
 const UserToolWrapper = styled(FlexBox)``;
+
+const navArr = [
+  {
+    id: 0,
+    title: "New",
+    type: "new",
+    detailArr: [
+      {
+        id: 0,
+        colNo: 0,
+        title: "New",
+        arr: ["홀리데이백 이벤트 자세히 보기", "신제품 전체", "베스트셀러"],
+      },
+      {
+        id: 1,
+        colNo: 0,
+        title: "Collections",
+        arr: [
+          "연말 선물 구매하기",
+          "워킹 컬렉션",
+          "아우터웨어",
+          "나이키 윈터 컬렉션",
+        ],
+      },
+      {
+        id: 2,
+        colNo: 1,
+        title: "Shop Icons",
+        arr: ["페가수스", "줌 플라이", "V2K"],
+      },
+      {
+        id: 3,
+        colNo: 2,
+        title: "Shop by Sport",
+        arr: ["러닝", "축구", "농구"],
+      },
+      {
+        id: 4,
+        colNo: 3,
+        title: "가이드",
+        arr: ["러닝화 가이드"],
+      },
+      {
+        id: 5,
+        colNo: 3,
+        title: "SNKRS",
+        arr: null,
+      },
+    ],
+  },
+  {
+    id: 1,
+    title: "Men",
+    type: "men",
+  },
+  {
+    id: 2,
+    title: "Women",
+    type: "women",
+  },
+  {
+    id: 3,
+    title: "Kids",
+    type: "kids",
+  },
+  {
+    id: 4,
+    title: "Sale",
+    type: "sale",
+  },
+];
 const Header: React.FC = () => {
   const headerRef = useRef<HTMLInputElement>(null);
   const [curScrollTop, setCurScrollTop] = React.useState<number>(0);
@@ -106,18 +186,18 @@ const Header: React.FC = () => {
   const [isScrollUp, setIsScrollUp] = React.useState<boolean>(true);
 
   const [isHover, setIsHover] = React.useState<boolean>(false);
+  const [hoverItem, setHoverItem] = React.useState<string>("");
 
-  const handleMouseEvent: React.MouseEventHandler<HTMLDivElement> = (event) => {
-    if (event.type === "mouseenter" && !isHover) {
-      setIsHover(true);
-    } else if (event.type === "mouseleave" && isHover) {
-      setIsHover(false);
-    }
+  const handleMouseEvent = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    type: string
+  ) => {
+    const target = navArr.filter((item) => item.type === type)[0].detailArr;
+    console.log("##target", target);
+    setHoverItem(type);
+    setIsHover((prev) => !prev);
   };
 
-  useEffect(() => {
-    console.log("##isHover", isHover);
-  }, [isHover]);
   useScrollDirection(
     () => {
       setIsScrollUp(false);
@@ -142,6 +222,7 @@ const Header: React.FC = () => {
   useEffect(() => {
     setIsTopBarShow(curScrollTop < 100);
   }, [curScrollTop]);
+
   return (
     <>
       {isTopBarShow && <TopBar />}
@@ -169,27 +250,23 @@ const Header: React.FC = () => {
           </SwooshSvg>
         </SwooshLink>
         <Nav>
-          <NavWrapper
-            justify="center"
-            onMouseEnter={handleMouseEvent}
-            onMouseLeave={handleMouseEvent}
-          >
-            <NavLinkWrapper>
-              <NavLink>New</NavLink>
-            </NavLinkWrapper>
-            <NavLinkWrapper>
-              <NavLink>Men</NavLink>
-            </NavLinkWrapper>
-            <NavLinkWrapper>
-              <NavLink>Women</NavLink>
-            </NavLinkWrapper>
-            <NavLinkWrapper>
-              <NavLink>Kids</NavLink>
-            </NavLinkWrapper>
-            <NavLinkWrapper>
-              <NavLink>Sale</NavLink>
-            </NavLinkWrapper>
-            {isHover && <HoverContainer>?????</HoverContainer>}
+          <NavWrapper justify="center">
+            {navArr.map((item) => (
+              <NavLinkWrapper
+                key={item.type}
+                onMouseEnter={(e) => handleMouseEvent(e, item.type)}
+                onMouseLeave={(e) => handleMouseEvent(e, item.type)}
+              >
+                <NavLink>{item.title}</NavLink>
+              </NavLinkWrapper>
+            ))}
+
+            {isHover && (
+              <HoverContainer>
+                <HoverNav></HoverNav>
+                <HoverEmpty></HoverEmpty>
+              </HoverContainer>
+            )}
           </NavWrapper>
         </Nav>
 
