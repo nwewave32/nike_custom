@@ -136,19 +136,50 @@ const navArr = [
         id: 2,
         colNo: 1,
         title: "Shop Icons",
-        arr: ["페가수스", "줌 플라이", "V2K"],
+        arr: [
+          "페가수스",
+          "줌 플라이",
+          "V2K",
+          "줌 보메로 5",
+          "P-6000",
+          "에어 포스 1",
+          "나이키 C1TY",
+          "킬샷",
+          "필드 제너럴",
+          "코르테즈",
+          "덩크",
+          "에어맥스",
+          "메트콘",
+        ],
       },
       {
         id: 3,
         colNo: 2,
         title: "Shop by Sport",
-        arr: ["러닝", "축구", "농구"],
+        arr: [
+          "러닝",
+          "축구",
+          "농구",
+          "트레이닝 & 짐",
+          "요가",
+          "골프",
+          "테니스",
+          "수영",
+          "스케이트보드",
+          "하이킹",
+        ],
       },
       {
         id: 4,
         colNo: 3,
         title: "가이드",
-        arr: ["러닝화 가이드"],
+        arr: [
+          "러닝화 가이드",
+          "축구화 가이드",
+          "조던 농구화 가이드",
+          "여성 브라 가이드",
+          "키즈 브라 가이드",
+        ],
       },
       {
         id: 5,
@@ -179,6 +210,18 @@ const navArr = [
     type: "sale",
   },
 ];
+
+// const HoverNav = ({hoverItem: string}) => {
+//   return <HoverContainer>
+//   <HoverNav>
+//     {navArr
+//       .filter((item) => item.type === hoverItem)[0]
+//       .detailArr?.map((navItem) => <div>{navItem}</div>)}
+//   </HoverNav>
+//   <HoverEmpty></HoverEmpty>
+// </HoverContainer>
+// }
+
 const Header: React.FC = () => {
   const headerRef = useRef<HTMLInputElement>(null);
   const [curScrollTop, setCurScrollTop] = React.useState<number>(0);
@@ -261,12 +304,9 @@ const Header: React.FC = () => {
               </NavLinkWrapper>
             ))}
 
-            {isHover && (
-              <HoverContainer>
-                <HoverNav></HoverNav>
-                <HoverEmpty></HoverEmpty>
-              </HoverContainer>
-            )}
+            {/* {isHover && (
+              <HoverNav hoverItem={hoverItem} />
+            )} */}
           </NavWrapper>
         </Nav>
 
