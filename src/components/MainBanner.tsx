@@ -29,7 +29,7 @@ const VideoWrapper = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
-  background-color: red;
+
   aspect-ratio: 1.92 / 1;
 `;
 

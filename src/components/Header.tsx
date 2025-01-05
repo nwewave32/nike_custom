@@ -1,6 +1,7 @@
 import { useScrollDirection } from "hooks/useScrollDirection";
-import React, { useEffect, useRef } from "react";
+import React, { HTMLProps, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
+import { colorSet } from "styles/ColorSet";
 import { IconSvg, SwooshLink, SwooshSvg } from "styles/GlobalStyle";
 import FlexBox from "./FlexBox";
 import SearchBar from "./SearchBar";
@@ -74,26 +75,6 @@ const NavLink = styled.a`
   &:hover {
     border-bottom: 2px solid #000;
   }
-`;
-
-const HoverContainer = styled.div`
-  position: absolute;
-  bottom: -100vh;
-  left: -48px;
-  z-index: 2;
-  width: 100%;
-  height: 100vh;
-`;
-
-const HoverNav = styled.div`
-  width: 100vw;
-  background-color: #fff;
-`;
-
-const HoverEmpty = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const IconContainer = styled.a`
@@ -193,34 +174,345 @@ const navArr = [
     id: 1,
     title: "Men",
     type: "men",
+    detailArr: [
+      {
+        id: 0,
+        colNo: 0,
+        title: "New",
+        arr: ["신제품 전체", "베스트셀러"],
+      },
+      {
+        id: 1,
+        colNo: 0,
+        title: "Collections",
+        arr: [
+          "트레이닝 컬렉션",
+          "르브론 XXII 터널 비전",
+          "나이키 테크 우븐 플래시 수트",
+          "머큐리얼 드림 스피드",
+          "나이키 C1TY",
+        ],
+      },
+      {
+        id: 2,
+        colNo: 1,
+        title: "신발",
+        arr: [
+          "라이프스타일",
+          "러닝",
+          "축구",
+          "조던",
+          "농구",
+          "트레이닝 & 짐",
+
+          "골프",
+          "테니스",
+
+          "스케이트보딩",
+          "10만원 이하 신발",
+        ],
+      },
+      {
+        id: 3,
+        colNo: 2,
+        title: "의류",
+        arr: [
+          "아우터웨어",
+          "재킷",
+          "후디 & 크루",
+          "팬츠 & 타이츠",
+          "조거 & 스웻팬츠",
+          "탑 & 티셔츠",
+          "쇼츠",
+          "셋업",
+          "ACG",
+          "러닝",
+          "조던",
+          "수영복",
+        ],
+      },
+      {
+        id: 4,
+        colNo: 3,
+        title: "용품",
+        arr: [
+          "모자 & 헤드밴드",
+          "가방",
+          "양말",
+          "장갑",
+          "축구",
+          "농구",
+          "골프",
+          "러닝",
+          "트레이닝",
+        ],
+      },
+    ],
   },
   {
     id: 2,
     title: "Women",
     type: "women",
+    detailArr: [
+      {
+        id: 0,
+        colNo: 0,
+        title: "New",
+        arr: ["신제품 전체", "베스트셀러"],
+      },
+      {
+        id: 1,
+        colNo: 0,
+        title: "Collections",
+        arr: ["나이키 젠비 컬렉션", "코르테즈"],
+      },
+      {
+        id: 2,
+        colNo: 1,
+        title: "신발",
+        arr: [
+          "라이프스타일",
+          "러닝",
+          "축구",
+          "조던",
+          "농구",
+          "트레이닝 & 짐",
+
+          "골프",
+          "테니스",
+
+          "스케이트보딩",
+          "10만원 이하 신발",
+        ],
+      },
+      {
+        id: 3,
+        colNo: 2,
+        title: "의류",
+        arr: [
+          "아우터웨어",
+          "재킷",
+          "후디 & 크루",
+          "팬츠",
+          "타이츠 & 레깅스",
+          "스커트 & 드레스",
+
+          "탑 & 티셔츠",
+          "쇼츠",
+          "스포츠 브라",
+          "셋업",
+          "ACG",
+          "러닝",
+          "조던",
+          "수영복",
+        ],
+      },
+      {
+        id: 4,
+        colNo: 3,
+        title: "용품",
+        arr: [
+          "모자 & 헤드밴드",
+          "가방",
+          "양말",
+          "장갑",
+          "축구",
+          "농구",
+          "골프",
+          "러닝",
+          "트레이닝",
+        ],
+      },
+    ],
   },
   {
     id: 3,
     title: "Kids",
     type: "kids",
+    detailArr: [
+      {
+        id: 0,
+        colNo: 0,
+        title: "New",
+        arr: ["신제품 전체", "베스트셀러"],
+      },
+      {
+        id: 1,
+        colNo: 0,
+        title: "Collections",
+        arr: ["나이키 C1TY", "키즈 부츠", "보메로"],
+      },
+      {
+        id: 2,
+        colNo: 1,
+        title: "신발",
+        arr: [
+          "베이비 (160mm 이하)",
+          "리틀키즈 (165-220mm)",
+          "주니어 (225-250mm)",
+          "키즈 이지온 신발",
+          "라이프스타일",
+          "러닝",
+
+          "축구",
+          "조던",
+          "농구",
+        ],
+      },
+      {
+        id: 3,
+        colNo: 2,
+        title: "의류",
+        arr: [
+          "베이비 (0-3세)",
+          "리틀키즈 (4-7세)",
+          "주니어 (7-15세)",
+          "아우터웨어",
+          "재킷",
+          "후디 & 크루",
+          "팬츠 & 레깅스",
+
+          "스커트 & 드레스",
+          "상하의 세트",
+          "탑 & 티셔츠",
+          "쇼츠",
+          "브라",
+          "셋업",
+          "ACG",
+
+          "조던",
+          "수영복",
+        ],
+      },
+      {
+        id: 4,
+        colNo: 3,
+        title: "용품",
+        arr: ["모자", "가방", "양말", "장갑", "축구", "농구"],
+      },
+    ],
   },
   {
     id: 4,
     title: "Sale",
     type: "sale",
+    detailArr: [
+      {
+        id: 0,
+        colNo: 0,
+        title: "Sale",
+        arr: ["All Sale", "Sale 신발", "Sale 의류", "Sale 용품"],
+      },
+      {
+        id: 1,
+        colNo: 1,
+        title: "Men",
+        arr: ["신발", "의류", "용품"],
+      },
+      {
+        id: 2,
+        colNo: 2,
+        title: "Women",
+        arr: ["신발", "의류", "용품"],
+      },
+      {
+        id: 3,
+        colNo: 3,
+        title: "Kids",
+        arr: ["신발", "의류", "용품"],
+      },
+    ],
   },
 ];
 
-// const HoverNav = ({hoverItem: string}) => {
-//   return <HoverContainer>
-//   <HoverNav>
-//     {navArr
-//       .filter((item) => item.type === hoverItem)[0]
-//       .detailArr?.map((navItem) => <div>{navItem}</div>)}
-//   </HoverNav>
-//   <HoverEmpty></HoverEmpty>
-// </HoverContainer>
-// }
+const HoverContainer = styled.div`
+  position: absolute;
+  bottom: -100vh;
+  left: 0;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+`;
+
+const HoverNav = styled(FlexBox)`
+  width: 100vw;
+  background-color: #fff;
+  gap: 12px;
+  padding-top: 30px;
+`;
+
+const HoverEmpty = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+`;
+
+const NavColItem = styled(FlexBox)`
+  flex: 1;
+  min-width: calc(60vw / 4);
+  max-width: max-content;
+`;
+
+const MenuWrapper = styled(FlexBox)`
+  margin-bottom: 30px;
+`;
+const MenuTitle = styled.h4`
+  font: var(--podium-cds-typography-body2-strong);
+  margin-bottom: 14px;
+`;
+
+const MenuAnchor = styled.a`
+  margin-bottom: 10px;
+  list-style: none;
+  color: ${colorSet.hoverColor};
+  font: var(--podium-cds-typography-body3-strong);
+`;
+
+interface HoverNavProps extends HTMLProps<HTMLDivElement> {
+  hoverItem: string;
+}
+
+const HoverNavComponent: React.FC<HoverNavProps> = ({ hoverItem }) => {
+  const detailMenu = navArr.filter((item) => item.type === hoverItem)[0]
+    .detailArr;
+
+  const classifyByCol = () => {
+    if (detailMenu) {
+      return detailMenu.reduce(
+        (acc: (typeof detailMenu)[], item) => {
+          const index = item.colNo;
+          if (!acc[index]) {
+            acc[index] = [];
+          }
+          acc[index].push(item);
+          return acc;
+        },
+        [] as (typeof detailMenu)[]
+      ); // 초기값 타입 지정
+    }
+    return [];
+  };
+
+  const classifiedMenu = classifyByCol();
+
+  return (
+    <HoverContainer>
+      <HoverNav justify="center" align="flex-start">
+        {classifiedMenu.map((col, indx) => (
+          <NavColItem key={indx} direction="column" align="flex-start">
+            {col.map((colItem) => (
+              <MenuWrapper direction="column" align="flex-start">
+                <MenuTitle>{colItem.title}</MenuTitle>
+                {colItem.arr?.map((menu) => <MenuAnchor>{menu}</MenuAnchor>)}
+              </MenuWrapper>
+            ))}
+          </NavColItem>
+        ))}
+      </HoverNav>
+      <HoverEmpty></HoverEmpty>
+    </HoverContainer>
+  );
+};
 
 const Header: React.FC = () => {
   const headerRef = useRef<HTMLInputElement>(null);
@@ -228,19 +520,20 @@ const Header: React.FC = () => {
   const [isTopBarShow, setIsTopBarShow] = React.useState<boolean>(true);
   const [isScrollUp, setIsScrollUp] = React.useState<boolean>(true);
 
-  const [isHover, setIsHover] = React.useState<boolean>(false);
-  const [hoverItem, setHoverItem] = React.useState<string>("");
+  const [isHover, setIsHover] = React.useState<boolean>(true);
+  const [hoverItem, setHoverItem] = React.useState<string>("new");
 
   const handleMouseEvent = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     type: string
   ) => {
-    const target = navArr.filter((item) => item.type === type)[0].detailArr;
-    console.log("##target", target);
     setHoverItem(type);
     setIsHover((prev) => !prev);
   };
 
+  useEffect(() => {
+    console.log("##hoverItem", hoverItem);
+  }, [hoverItem]);
   useScrollDirection(
     () => {
       setIsScrollUp(false);
@@ -301,12 +594,11 @@ const Header: React.FC = () => {
                 onMouseLeave={(e) => handleMouseEvent(e, item.type)}
               >
                 <NavLink>{item.title}</NavLink>
+                {isHover && hoverItem === item.type && (
+                  <HoverNavComponent hoverItem={hoverItem} />
+                )}
               </NavLinkWrapper>
             ))}
-
-            {/* {isHover && (
-              <HoverNav hoverItem={hoverItem} />
-            )} */}
           </NavWrapper>
         </Nav>
 
