@@ -426,7 +426,7 @@ const navArr = [
 ];
 
 const HoverContainer = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: -100vh;
   left: 0;
   z-index: 2;
@@ -470,9 +470,13 @@ const MenuAnchor = styled.a`
 
 interface HoverNavProps extends HTMLProps<HTMLDivElement> {
   hoverItem: string;
+  setIsHover: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const HoverNavComponent: React.FC<HoverNavProps> = ({ hoverItem }) => {
+const HoverNavComponent: React.FC<HoverNavProps> = ({
+  hoverItem,
+  setIsHover,
+}) => {
   const detailMenu = navArr.filter((item) => item.type === hoverItem)[0]
     .detailArr;
 
@@ -509,7 +513,7 @@ const HoverNavComponent: React.FC<HoverNavProps> = ({ hoverItem }) => {
           </NavColItem>
         ))}
       </HoverNav>
-      <HoverEmpty></HoverEmpty>
+      <HoverEmpty onMouseEnter={() => setIsHover(false)} />
     </HoverContainer>
   );
 };
@@ -520,20 +524,25 @@ const Header: React.FC = () => {
   const [isTopBarShow, setIsTopBarShow] = React.useState<boolean>(true);
   const [isScrollUp, setIsScrollUp] = React.useState<boolean>(true);
 
-  const [isHover, setIsHover] = React.useState<boolean>(true);
-  const [hoverItem, setHoverItem] = React.useState<string>("new");
+  const [isHover, setIsHover] = React.useState<boolean>(false);
+  const [hoverItem, setHoverItem] = React.useState<string>("");
 
   const handleMouseEvent = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     type: string
   ) => {
-    setHoverItem(type);
-    setIsHover((prev) => !prev);
+    if (event.type === "mouseenter") {
+      setHoverItem(type);
+      setIsHover(true);
+    } else if (event.type === "mouseleave") {
+      setIsHover(false);
+    }
   };
 
   useEffect(() => {
-    console.log("##hoverItem", hoverItem);
-  }, [hoverItem]);
+    if (!isHover) setHoverItem("");
+  }, [isHover]);
+
   useScrollDirection(
     () => {
       setIsScrollUp(false);
@@ -595,7 +604,10 @@ const Header: React.FC = () => {
               >
                 <NavLink>{item.title}</NavLink>
                 {isHover && hoverItem === item.type && (
-                  <HoverNavComponent hoverItem={hoverItem} />
+                  <HoverNavComponent
+                    hoverItem={hoverItem}
+                    setIsHover={setIsHover}
+                  />
                 )}
               </NavLinkWrapper>
             ))}
