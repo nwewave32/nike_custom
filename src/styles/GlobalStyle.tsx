@@ -39,6 +39,9 @@ export const GlobalStyle = createGlobalStyle`
 
   }
 
+    a:focus {
+    outline: 0;
+  }
   button {
     user-select: none; /* 버튼 등 상호작용 요소에만 적용 */
   }

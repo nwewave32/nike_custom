@@ -1,6 +1,6 @@
 import { useScrollDirection } from "hooks/useScrollDirection";
 import React, { HTMLProps, useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { IconSvg, SwooshLink, SwooshSvg } from "styles/GlobalStyle";
 import FlexBox from "./FlexBox";
@@ -14,23 +14,12 @@ interface HeaderWrapperProps {
 const shouldForwardProp = (prop: string) =>
   !["curScrollTop", "isScrollUp"].includes(prop);
 
-// const transition = ({ curScrollTop, isScrollUp }: HeaderWrapperProps) => {
-//   const isTopBarShow = curScrollTop < 60;
-
-//   return `
-//     position: ${curScrollTop > 100 && isScrollUp ? "fixed" : "relative"};
-//     top: 0;
-//     ${isTopBarShow ? "" : "transition: transform 1.5s ease;"}
-//     transform: translateY(${isTopBarShow || isScrollUp ? 0 : "-60px"});
-//     z-index:2;
-//   `;
-// };
 const transition = ({ curScrollTop, isScrollUp }: HeaderWrapperProps) => css`
   position: ${curScrollTop > 100 && isScrollUp ? "fixed" : "relative"};
   top: 0;
   transition: ${curScrollTop < 60 ? "" : "transform 1.5s ease"};
   transform: translateY(${curScrollTop < 60 || isScrollUp ? 0 : "-60px"});
-  z-index: 2;
+  z-index: 10;
 `;
 
 const HeaderWrapper = styled.header.withConfig({
@@ -447,10 +436,32 @@ const HoverEmpty = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
 `;
 
-const NavColItem = styled(FlexBox)`
+const fade = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+interface NavColItemProps {
+  isHover: boolean;
+}
+const shouldForwardProps = (prop: string) => !["isHover"].includes(prop);
+
+const NavColItem = styled(FlexBox).withConfig({
+  shouldForwardProp: shouldForwardProps,
+})<NavColItemProps>`
   flex: 1;
   min-width: calc(60vw / 4);
   max-width: max-content;
+  ${({ isHover }) =>
+    isHover &&
+    css`
+      animation: ${fade} 1.2s ease;
+    `}
 `;
 
 const MenuWrapper = styled(FlexBox)`
@@ -468,14 +479,16 @@ const MenuAnchor = styled.a`
   font: var(--podium-cds-typography-body3-strong);
 `;
 
-interface HoverNavProps extends HTMLProps<HTMLDivElement> {
+interface HoverNavComponentProps extends HTMLProps<HTMLDivElement> {
   hoverItem: string;
   setIsHover: React.Dispatch<React.SetStateAction<boolean>>;
+  isHover: boolean;
 }
 
-const HoverNavComponent: React.FC<HoverNavProps> = ({
+const HoverNavComponent: React.FC<HoverNavComponentProps> = ({
   hoverItem,
   setIsHover,
+  isHover,
 }) => {
   const detailMenu = navArr.filter((item) => item.type === hoverItem)[0]
     .detailArr;
@@ -503,11 +516,24 @@ const HoverNavComponent: React.FC<HoverNavProps> = ({
     <HoverContainer>
       <HoverNav justify="center" align="flex-start">
         {classifiedMenu.map((col, indx) => (
-          <NavColItem key={indx} direction="column" align="flex-start">
+          <NavColItem
+            key={`col No.${indx} (${hoverItem})`}
+            direction="column"
+            align="flex-start"
+            isHover={isHover}
+          >
             {col.map((colItem) => (
-              <MenuWrapper direction="column" align="flex-start">
+              <MenuWrapper
+                key={`menu in col No.${colItem.colNo} (${hoverItem})`}
+                direction="column"
+                align="flex-start"
+              >
                 <MenuTitle>{colItem.title}</MenuTitle>
-                {colItem.arr?.map((menu) => <MenuAnchor>{menu}</MenuAnchor>)}
+                {colItem.arr?.map((menu, idx) => (
+                  <MenuAnchor key={`${menu} (${hoverItem})`} href="#">
+                    {menu}
+                  </MenuAnchor>
+                ))}
               </MenuWrapper>
             ))}
           </NavColItem>
@@ -607,6 +633,7 @@ const Header: React.FC = () => {
                   <HoverNavComponent
                     hoverItem={hoverItem}
                     setIsHover={setIsHover}
+                    isHover={isHover}
                   />
                 )}
               </NavLinkWrapper>
