@@ -53,7 +53,7 @@ const FooterSpace = styled.div.withConfig({
 `;
 
 const FooterSpacer = forwardRef<HTMLDivElement, FooterSpacerProps>(
-  ({ margin, border, ...rest }) => {
+  ({ margin, border, ...rest }, ref) => {
     return <FooterSpace margin={margin} border={border} {...rest} />;
   }
 );

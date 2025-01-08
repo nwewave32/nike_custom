@@ -158,9 +158,6 @@ export const SwooshLink = styled.a`
   height: 59px;
   width: 59px;
   margin: 1px 0;
-  &:focus {
-    outline: 0;
-  }
 `;
 
 type IconSvgProps = React.PropsWithChildren<{ width?: number }>;
@@ -209,4 +206,16 @@ export const Paragraph = styled.p`
 export const SectionTitle = styled.h2`
   font: var(--podium-cds-typography-320-to-1919-title3);
   color: ${colorSet.title};
+`;
+
+interface EmptySpaceProps {
+  height: number;
+}
+const shouldForwardProps = (prop: string) => !["height"].includes(prop);
+
+export const EmptySpace = styled.div.withConfig({
+  shouldForwardProp: shouldForwardProps,
+})<EmptySpaceProps>`
+  width: 100%;
+  height: ${({ height }) => height}px;
 `;

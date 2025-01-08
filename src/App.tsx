@@ -1,4 +1,5 @@
 import FlexBox from "components/FlexBox";
+import ShopPage from "pages/ShopPage";
 import TestPage from "pages/TestPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
@@ -19,18 +20,20 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <BrowserRouter>
+
+      <BrowserRouter basename={import.meta.env.BASE_URL || "/"}>
+        <Header />
         <AppContainer direction="column">
           <MainContainer>
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/shop" element={<ShopPage />} />
               <Route path="/test" element={<TestPage />} />
             </Routes>
           </MainContainer>
         </AppContainer>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </>
   );
 }

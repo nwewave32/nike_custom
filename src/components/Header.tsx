@@ -1,5 +1,6 @@
 import { useScrollDirection } from "hooks/useScrollDirection";
 import React, { HTMLProps, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { IconSvg, SwooshLink, SwooshSvg } from "styles/GlobalStyle";
@@ -55,7 +56,7 @@ const NavLinkWrapper = styled(FlexBox)`
   height: 100%;
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   font-weight: 500;
 
   line-height: 1.5;
@@ -68,9 +69,6 @@ const NavLink = styled.a`
 
 const IconContainer = styled.a`
   padding: 6px; //todo: responsive
-  &:focus {
-    outline: 0;
-  }
 `;
 
 const IconWrapper = styled(FlexBox)`
@@ -472,7 +470,7 @@ const MenuTitle = styled.h4`
   margin-bottom: 14px;
 `;
 
-const MenuAnchor = styled.a`
+const MenuAnchor = styled(Link)`
   margin-bottom: 10px;
   list-style: none;
   color: ${colorSet.hoverColor};
@@ -522,15 +520,15 @@ const HoverNavComponent: React.FC<HoverNavComponentProps> = ({
             align="flex-start"
             isHover={isHover}
           >
-            {col.map((colItem) => (
+            {col.map((colItem, menuIdx) => (
               <MenuWrapper
-                key={`menu in col No.${colItem.colNo} (${hoverItem})`}
+                key={`menu${menuIdx} in col No.${colItem.colNo} (${hoverItem})`}
                 direction="column"
                 align="flex-start"
               >
                 <MenuTitle>{colItem.title}</MenuTitle>
                 {colItem.arr?.map((menu, idx) => (
-                  <MenuAnchor key={`${menu} (${hoverItem})`} href="#">
+                  <MenuAnchor key={`${menu} (${hoverItem})`} to="/shop">
                     {menu}
                   </MenuAnchor>
                 ))}
@@ -568,6 +566,11 @@ const Header: React.FC = () => {
   useEffect(() => {
     if (!isHover) setHoverItem("");
   }, [isHover]);
+
+  useEffect(() => {
+    console.log("##?", isHover);
+    setIsHover(false);
+  }, [window.location.href]);
 
   useScrollDirection(
     () => {
@@ -628,7 +631,7 @@ const Header: React.FC = () => {
                 onMouseEnter={(e) => handleMouseEvent(e, item.type)}
                 onMouseLeave={(e) => handleMouseEvent(e, item.type)}
               >
-                <NavLink>{item.title}</NavLink>
+                <NavLink to="/shop">{item.title}</NavLink>
                 {isHover && hoverItem === item.type && (
                   <HoverNavComponent
                     hoverItem={hoverItem}
