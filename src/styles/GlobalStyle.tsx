@@ -82,6 +82,10 @@ input:active {
   }
 }
 
+li {
+list-style: none;
+}
+
    :root {
     --podium-cds-typography-320-to-959-oversize1: 500 6rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
     --podium-cds-typography-320-to-959-oversize2: 500 4.75rem/1.35 'Noto Sans KR Medium',Helvetica,Arial,'Apple SD Gothic Neo','Apple SD 산돌고딕 Neo','Malgun Gothic','맑은 고딕',sans-serif;
