@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 interface ListItemComponentProps {
   children?: ReactNode;
   type: "checkbox" | "color";
-  text: string;
+  item: any;
 }
 
 const ListItemComponentContainer = styled.li`
@@ -82,7 +82,7 @@ const Check = styled.div`
 export const ListItemComponent = forwardRef<
   HTMLAnchorElement,
   ListItemComponentProps
->(({ children, text, type, ...rest }, ref) => {
+>(({ children, item, type, ...rest }, ref) => {
   const [isSelected, setIsSelected] = useState(false);
   if (type === "checkbox")
     return (
@@ -93,20 +93,17 @@ export const ListItemComponent = forwardRef<
         >
           {isSelected && <Check />}
         </CheckBox>
-        <span>{text || children}</span>
+        <span>{item || children}</span>
       </ListItemComponentContainer>
     );
   else
     return (
-      <ListItemComponentContainer {...rest}>
-        {text || children}
-      </ListItemComponentContainer>
+      <ListItemComponentContainer {...rest}>{item}</ListItemComponentContainer>
     );
 });
 
 ListItemComponent.defaultProps = {
   type: "checkbox",
-  text: "checkbox",
 };
 
 export default ListItemComponent;
