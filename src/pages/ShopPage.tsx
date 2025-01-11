@@ -1,8 +1,10 @@
 import ActionArrow from "components/ActionArrow";
 import FlexBox from "components/FlexBox";
-import ListItemComponent from "components/ListItemComponent";
+import { filters, products } from "features/shop/constant";
+import ProductGrid from "features/shop/ProductGrid";
+import Sidebar from "features/shop/Sidebar";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { EmptySpace } from "styles/GlobalStyle";
 
@@ -20,7 +22,11 @@ const WallHeader = styled(FlexBox)`
   background-color: #fff;
 `;
 
-const WallTitle = styled.h2``;
+const WallTitle = styled.h1`
+  font: var(--podium-cds-typography-body1-strong);
+  font-size: 24px;
+  line-height: 1.3;
+`;
 
 const WallFuncWrapper = styled(FlexBox)`
   font: var(--podium-cds-typography-body1);
@@ -33,7 +39,6 @@ const FilterWrapper = styled(FlexBox)`
 `;
 
 const SortWrapper = styled(FlexBox)`
-  padding-right: 25px;
   cursor: pointer;
   gap: 8px;
 `;
@@ -62,350 +67,10 @@ const ResultBody = styled(FlexBox)`
   height: auto;
 `;
 
-const hide = keyframes`
- 0% {
-  margin-left: 0px;
- }
-100%{
-  margin-left:-260px;
-  visibility:hidden;
-}
-`;
-
-const show = keyframes`
- 0% {
-  margin-left:-260px;
-  visibility:visible;
- }
-  100%{
-    margin-left: 0px;
-  }
-`;
-
-interface SimpleBarProps {
-  isShow: boolean;
-}
-
-const SimpleBar = styled(FlexBox).withConfig({
-  shouldForwardProp: (prop: string) => prop !== "isShow",
-})<SimpleBarProps>`
-  position: sticky;
-  overflow: scroll;
-  padding: 0 0 1em 48px;
-  width: 260px; //todo: responsive
-  min-height: 500px;
-  animation: ${({ isShow }) => (isShow ? show : hide)} 300ms forwards;
-`;
-
-const Categories = styled(FlexBox)`
-  padding-bottom: 40px;
-`;
-
-const CategoryItem = styled(FlexBox)`
-  cursor: pointer;
-  color: #111111;
-  font-weight: 500;
-  white-space: normal;
-  word-wrap: break-word;
-  line-height: 1.35em;
-  padding-bottom: 10px;
-  padding-right: 1.1em;
-`;
-
-const Filters = styled(FlexBox)`
-  width: 100%;
-`;
-
-const FilterMenuWrapper = styled(FlexBox)`
-  width: 100%;
-  border-top: solid 1px #e5e5e5;
-`;
-
-const FilterTitle = styled(FlexBox)`
-  width: 100%;
-  font: var(--podium-cds-typography-body1-strong);
-  padding: 12px 0;
-`;
-
-const FilterMenuUl = styled.ul``;
-
-const MoreWrapper = styled(FlexBox)`
-  cursor: pointer;
-`;
-
-const ColorGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  padding: 8px 0 10px;
-  width: 100%;
-`;
-
-const ColorWrapper = styled(FlexBox)`
-  height: 100%;
-  min-height: 68px;
-`;
-
-const ColorPallete = styled.div`
-  background-color: ${({ color }) => color};
-  ${({ color }) =>
-    color === "#fff"
-      ? css`
-          border: 1px solid #e5e5e5;
-        `
-      : color === "multi"
-        ? css`
-            background: radial-gradient(#ffffff 20%, transparent 20%),
-              radial-gradient(#ffffff 20%, transparent 20%), #000;
-            background-position:
-              0 0,
-              8px 8px;
-            background-size: 15px 15px;
-            display: inline-block;
-          `
-        : ""};
-  width: 28px;
-  height: 28px;
-  border-radius: 100%;
-  cursor: pointer;
-`;
-const ColorTitle = styled.div`
-  padding-top: 2px;
-  font: var(--podium-cds-typography-body1);
-  font-size: 12px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.6;
-  }
-`;
-
-const Check = styled.div`
-  color: #fff;
-  position: absolute;
-  top: 3px;
-  left: 2px;
-  display: inline-block;
-  width: 13px;
-  height: 13px;
-
-  &:before,
-  &:after {
-    content: "";
-    height: 2px;
-    background-color: currentcolor;
-    display: block;
-    position: absolute;
-    transform-origin: left center;
-  }
-
-  &:before {
-    width: 6px;
-    border-top-left-radius: 1px;
-    border-bottom-left-radius: 1px;
-    top: 5px;
-    left: 1px;
-    transform: rotate(49deg) scale(1, 1);
-  }
-
-  &:after {
-    width: 13px;
-    border-top-right-radius: 1px;
-    border-bottom-right-radius: 1px;
-    top: 10px;
-    left: 4px;
-    transform: rotate(-49deg) scale(1, 1);
-  }
-`;
-
 const GridProduct = styled(FlexBox)`
   width: 100%;
   min-height: 500px;
 `;
-
-const categories = [
-  "신발",
-  "탑 & 티셔츠",
-  "후디 & 크루",
-  "재킷 & 베스트",
-  "팬츠 & 타이츠",
-  "쇼츠",
-  "스포츠 브라",
-  "컴프레션 및 베이스레이어",
-  "트랙수트",
-  "스커트 & 드레스",
-  "양말",
-  "용품",
-];
-
-const filters: Filter[] = [
-  {
-    id: 0,
-    title: "성별",
-    name: "sex",
-    type: "checkbox",
-    items: ["남성", "여성", "유니섹스"],
-  },
-  {
-    id: 1,
-    title: "스포츠",
-    name: "sports",
-    type: "checkbox",
-    items: [
-      "라이프스타일",
-      "Performance",
-      "러닝",
-      "트레이닝 및 짐",
-      "농구",
-      "축구",
-      "골프",
-
-      "스케이트보딩",
-      "테니스",
-      "트랙 및 필드",
-      "워킹",
-      "댄스",
-      "요가",
-    ],
-  },
-  {
-    id: 2,
-    title: "가격대",
-    name: "price",
-    type: "checkbox",
-    items: [
-      "0 - 50,000 원",
-      "50,000 - 100,000 원",
-      "100,000 - 150,000 원",
-      "150,000 - 200,000 원",
-      "200,000 원 +",
-    ],
-  },
-  {
-    id: 3,
-    title: "색상",
-    name: "color",
-    type: "color",
-    items: [
-      { id: 0, title: "퍼플", code: "#8d429f" },
-      { id: 1, title: "블랙", code: "#000" },
-      { id: 2, title: "레드", code: "#e7352b" },
-      { id: 3, title: "오렌지", code: "#f36b26" },
-      { id: 4, title: "블루", code: "#1790c8" },
-      { id: 5, title: "화이트", code: "#fff" },
-      { id: 6, title: "브라운", code: "#825d41" },
-      { id: 7, title: "그린", code: "#7bba3c" },
-      { id: 8, title: "옐로우", code: "#fed533" },
-      { id: 9, title: "멀티컬러", code: "multi" },
-      { id: 10, title: "그레이", code: "#808080" },
-
-      { id: 11, title: "핑크", code: "#f0728f" },
-    ],
-  },
-];
-
-type ColorItem = {
-  id: number;
-  title: string;
-  code: string;
-};
-
-type Filter = {
-  id: number;
-  title: string;
-  name: "sex" | "color" | "sports" | "price";
-  type: "color" | "checkbox";
-  items: string[] | ColorItem[];
-};
-
-interface FilterMenuProps {
-  filter: Filter;
-  setFilters: React.Dispatch<
-    React.SetStateAction<{
-      sex: string[];
-      price: string[];
-      color: string[];
-      sports: string[];
-    }>
-  >;
-}
-
-const FilterMenu: React.FC<FilterMenuProps> = ({ filter, setFilters }) => {
-  const [isMenuShow, setIsMenuShow] = useState(true);
-  const [isMoreShow, setIsMoreShow] = useState(false);
-
-  const handleChange = (
-    key: "sex" | "color" | "sports" | "price",
-    value: string
-  ) => {
-    setFilters((prev) => {
-      const current = prev[key];
-      const updated = current.includes(value)
-        ? current.filter((item) => item !== value) // 체크 해제 시 제거
-        : [...current, value]; // 체크 시 추가
-
-      return { ...prev, [key]: updated };
-    });
-  };
-
-  function isColorItemArray(
-    items: string[] | ColorItem[]
-  ): items is ColorItem[] {
-    return (items as ColorItem[])[0]?.code !== undefined;
-  }
-
-  return (
-    <FilterMenuWrapper direction="column" align="flex-start">
-      <FilterTitle
-        justify="space-between"
-        onClick={() => setIsMenuShow((prev) => !prev)}
-      >
-        <span>{filter.title}</span>
-        <ActionArrow isUp={isMenuShow} />
-      </FilterTitle>
-      {isMenuShow &&
-        (!isColorItemArray(filter.items) ? (
-          <>
-            <FilterMenuUl>
-              {filter.items
-                .slice(0, !isMoreShow ? 3 : undefined)
-                .map((item, index) => (
-                  <ListItemComponent
-                    type={filter.type}
-                    key={index}
-                    item={item}
-                  />
-                ))}
-            </FilterMenuUl>
-            {filter.items.length > 3 && (
-              <>
-                <EmptySpace height={20} />
-                <MoreWrapper onClick={() => setIsMoreShow((prev) => !prev)}>
-                  <span>{!isMoreShow ? "+ 더 보기" : "- 숨기기"}</span>
-                </MoreWrapper>
-              </>
-            )}
-            <EmptySpace height={20} />
-          </>
-        ) : (
-          <>
-            <ColorGrid>
-              {filter.items.map((item, index) => (
-                <ColorWrapper
-                  key={item?.title}
-                  direction="column"
-                  onClick={() => handleChange(filter.name, item.id.toString())}
-                >
-                  <ColorPallete color={item.code}>{}</ColorPallete>
-                  <ColorTitle>{item.title}</ColorTitle>
-                </ColorWrapper>
-              ))}
-            </ColorGrid>
-          </>
-        ))}
-    </FilterMenuWrapper>
-  );
-};
 
 function ShopPage() {
   const [isFilterShow, setIsFilterShow] = useState(true);
@@ -414,12 +79,7 @@ function ShopPage() {
   const [isSortSelectShow, setIsSortSelectShow] = useState(false);
   const wallHeaderRef = useRef(null);
   const selectRef = useRef<HTMLDivElement | null>(null);
-  const [selectedFilters, setSelectedFilters] = useState({
-    sex: [] as string[],
-    price: [] as string[],
-    color: [] as string[],
-    sports: [] as string[],
-  });
+  const [selectedFilters, setSelectedFilters] = useState(filters);
 
   useEffect(() => {
     console.log("##selectedFilters", selectedFilters);
@@ -506,24 +166,14 @@ function ShopPage() {
           </SortWrapper>
         </WallFuncWrapper>
       </WallHeader>
-      <ResultBody>
-        <SimpleBar direction="column" align="flex-start" isShow={isFilterShow}>
-          <Categories direction="column" align="flex-start">
-            {categories.map((category) => (
-              <CategoryItem key={category}>{category}</CategoryItem>
-            ))}
-          </Categories>
-          <Filters direction="column" align="flex-start">
-            {filters.map((filter) => (
-              <FilterMenu
-                key={filter.title}
-                filter={filter}
-                setFilters={setSelectedFilters}
-              />
-            ))}
-          </Filters>
-        </SimpleBar>
-        <GridProduct></GridProduct>
+      <EmptySpace height={15} />
+      <ResultBody align="flex-start">
+        <Sidebar
+          filters={selectedFilters}
+          setFilters={setSelectedFilters}
+          isFilterShow={isFilterShow}
+        />
+        <ProductGrid products={products} />
       </ResultBody>
     </MainContainer>
   );

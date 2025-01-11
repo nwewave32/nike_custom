@@ -1,8 +1,10 @@
 export interface Product {
   id: number;
+  feat?: string;
   name: string;
-  price: number;
-  color: string;
   category: string;
+  color: string[];
+  price: number;
+  sale?: number;
   image: string; // 이미지 URL
 }

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { IconSvg, SwooshLink, SwooshSvg } from "styles/GlobalStyle";
-import FlexBox from "./FlexBox";
-import SearchBar from "./SearchBar";
+import FlexBox from "../components/FlexBox";
+import SearchBar from "../components/SearchBar";
 
 interface HeaderWrapperProps {
   curScrollTop: number;

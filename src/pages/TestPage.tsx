@@ -1,7 +1,6 @@
-import ProductList from "components/ProductList";
-import Sidebar from "components/Sidebar";
-import { Product } from "features/types/Product";
+import ProductList from "features/shop/ProductList";
 import { useState } from "react";
+import { Product } from "types/Product";
 
 const products: Product[] = [
   {
@@ -77,7 +76,6 @@ function TestPage() {
 
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar filters={filters} setFilters={setFilters} />
       <ProductList products={filteredProducts} />
     </div>
   );

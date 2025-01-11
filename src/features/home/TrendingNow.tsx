@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Carousel, ImageData } from "./Carousel";
+import { Carousel, ImageData } from "../../components/Carousel";
 
 const TrendingSection = styled.section`
   position: relative;

@@ -1,0 +1,127 @@
+import { Filter } from "types/Filter";
+import { Product } from "types/Product";
+
+export const categories = [
+  "신발",
+  "탑 & 티셔츠",
+  "후디 & 크루",
+  "재킷 & 베스트",
+  "팬츠 & 타이츠",
+  "쇼츠",
+  "스포츠 브라",
+
+  "트랙수트",
+  "스커트 & 드레스",
+  "양말",
+  "용품",
+];
+export const filters: Record<"sex" | "color" | "sports" | "price", Filter> = {
+  sex: {
+    id: 0,
+    title: "성별",
+    name: "sex",
+    type: "checkbox",
+    items: [
+      { id: 0, isSelected: false, name: "남성" },
+      { id: 1, isSelected: false, name: "여성" },
+      { id: 2, isSelected: false, name: "유니섹스" },
+    ],
+  },
+  sports: {
+    id: 1,
+    title: "스포츠",
+    name: "sports",
+    type: "checkbox",
+    items: [
+      { id: 0, isSelected: false, name: "라이프스타일" },
+      { id: 1, isSelected: false, name: "Performance" },
+      { id: 2, isSelected: false, name: "러닝" },
+      { id: 3, isSelected: false, name: "트레이닝 및 짐" },
+      { id: 4, isSelected: false, name: "농구" },
+      { id: 5, isSelected: false, name: "축구" },
+      { id: 6, isSelected: false, name: "골프" },
+      { id: 7, isSelected: false, name: "스케이트보딩" },
+      { id: 8, isSelected: false, name: "테니스" },
+      { id: 9, isSelected: false, name: "트랙 및 필드" },
+      { id: 10, isSelected: false, name: "워킹" },
+      { id: 11, isSelected: false, name: "댄스" },
+      { id: 12, isSelected: false, name: "요가" },
+    ],
+  },
+  price: {
+    id: 2,
+    title: "가격대",
+    name: "price",
+    type: "checkbox",
+    items: [
+      { id: 0, isSelected: false, name: "0 - 50,000 원" },
+      { id: 1, isSelected: false, name: "50,000 - 100,000 원" },
+      { id: 2, isSelected: false, name: "100,000 - 150,000 원" },
+      { id: 3, isSelected: false, name: "150,000 - 200,000 원" },
+      { id: 4, isSelected: false, name: "200,000 원 +" },
+    ],
+  },
+  color: {
+    id: 3,
+    title: "색상",
+    name: "color",
+    type: "color",
+    items: [
+      { id: 0, name: "퍼플", isSelected: false, code: "#8d429f" },
+      { id: 1, name: "블랙", isSelected: false, code: "#000" },
+      { id: 2, name: "레드", isSelected: false, code: "#e7352b" },
+      { id: 3, name: "오렌지", isSelected: false, code: "#f36b26" },
+      { id: 4, name: "블루", isSelected: false, code: "#1790c8" },
+      { id: 5, name: "화이트", isSelected: false, code: "#fff" },
+      { id: 6, name: "브라운", isSelected: false, code: "#825d41" },
+      { id: 7, name: "그린", isSelected: false, code: "#7bba3c" },
+      { id: 8, name: "옐로우", isSelected: false, code: "#fed533" },
+      { id: 9, name: "멀티컬러", isSelected: false, code: "multi" },
+      { id: 10, name: "그레이", isSelected: false, code: "#808080" },
+      { id: 11, name: "핑크", isSelected: false, code: "#f0728f" },
+    ],
+  },
+};
+export const products: Product[] = [
+  {
+    id: 1,
+    name: "축구공",
+    price: 30000,
+    color: ["블랙"],
+    category: "축구",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 2,
+    name: "농구공",
+    price: 50000,
+    color: ["오렌지"],
+    category: "농구",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 3,
+    name: "요가 매트",
+    price: 40000,
+    color: ["블루"],
+    category: "요가",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 4,
+    name: "수영 모자",
+    price: 20000,
+    color: ["핑크"],
+    category: "수영",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    id: 5,
+    name: "수영 모자2",
+    price: 120000,
+    color: ["핑크"],
+    category: "수영",
+    image: "https://via.placeholder.com/150",
+  },
+  // 추가 상품...
+];

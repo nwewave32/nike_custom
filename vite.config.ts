@@ -15,10 +15,12 @@ export default defineConfig({
       components: path.resolve(__dirname, "src/components"),
       features: path.resolve(__dirname, "src/features"),
       hooks: path.resolve(__dirname, "src/hooks"),
+      layout: path.resolve(__dirname, "src/layout"),
       pages: path.resolve(__dirname, "src/pages"),
       services: path.resolve(__dirname, "src/services"),
       store: path.resolve(__dirname, "src/store"),
       styles: path.resolve(__dirname, "src/styles"),
+      types: path.resolve(__dirname, "src/types"),
     },
   },
 });

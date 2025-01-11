@@ -1,6 +1,6 @@
-import ProductCard from "components/ProductCard";
-import { Product } from "features/types/Product";
+import ProductCard from "features/shop/ProductCard";
 import React from "react";
+import { Product } from "types/Product";
 
 interface ProductListProps {
   products: Product[];

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { Paragraph, SubTitle, Title } from "styles/GlobalStyle";
-import LinkButton from "./LinkButton";
+import LinkButton from "../../components/LinkButton";
 
 const TopBanner = styled.div`
   width: 100%;

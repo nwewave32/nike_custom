@@ -1,12 +1,12 @@
 import FlexBox from "components/FlexBox";
+import Footer from "layout/Footer";
+import Header from "layout/Header";
+import MainPage from "pages/MainPage";
 import ShopPage from "pages/ShopPage";
 import TestPage from "pages/TestPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import MainPage from "./pages/MainPage";
-import { GlobalStyle } from "./styles/GlobalStyle";
+import { GlobalStyle } from "styles/GlobalStyle";
 
 const AppContainer = styled(FlexBox)`
   min-height: 100vh;

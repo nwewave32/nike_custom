@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colorSet } from "styles/ColorSet";
 
 import { IconSvg } from "styles/GlobalStyle";
-import FlexBox from "./FlexBox";
+import FlexBox from "../components/FlexBox";
 
 const FooterWrapper = styled.footer`
   padding: 48px;
@@ -82,7 +82,7 @@ const LegalFooterContainer = styled(FlexBox)`
 
 const LegalFooterWrapper = styled.div`
   width: 50%;
-  font-size: 14px;
+  font-size: 13px;
   color: ${colorSet.hoverColor};
   line-height: 1.75;
 `;

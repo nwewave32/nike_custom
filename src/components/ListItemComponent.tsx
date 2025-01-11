@@ -1,10 +1,13 @@
-import { forwardRef, ReactNode, useState } from "react";
+import { forwardRef, ReactNode } from "react";
 import styled, { css } from "styled-components";
+import Check from "./Check";
 
 interface ListItemComponentProps {
   children?: ReactNode;
-  type: "checkbox" | "color";
+  type: "checkbox" | "radio" | "color";
   item: any;
+  isSelected: boolean;
+  onClick: (event: React.MouseEvent<HTMLLIElement>) => void;
 }
 
 const ListItemComponentContainer = styled.li`
@@ -42,64 +45,18 @@ const CheckBox = styled.div.withConfig({
     `}
 `;
 
-const Check = styled.div`
-  color: #fff;
-  position: absolute;
-  top: 3px;
-  left: 2px;
-  display: inline-block;
-  width: 13px;
-  height: 13px;
-
-  &:before,
-  &:after {
-    content: "";
-    height: 2px;
-    background-color: currentcolor;
-    display: block;
-    position: absolute;
-    transform-origin: left center;
-  }
-
-  &:before {
-    width: 6px;
-    border-top-left-radius: 1px;
-    border-bottom-left-radius: 1px;
-    top: 5px;
-    left: 1px;
-    transform: rotate(49deg) scale(1, 1);
-  }
-
-  &:after {
-    width: 13px;
-    border-top-right-radius: 1px;
-    border-bottom-right-radius: 1px;
-    top: 10px;
-    left: 4px;
-    transform: rotate(-49deg) scale(1, 1);
-  }
-`;
 export const ListItemComponent = forwardRef<
   HTMLAnchorElement,
   ListItemComponentProps
->(({ children, item, type, ...rest }, ref) => {
-  const [isSelected, setIsSelected] = useState(false);
-  if (type === "checkbox")
-    return (
-      <ListItemComponentContainer {...rest}>
-        <CheckBox
-          isSelected={isSelected}
-          onClick={() => setIsSelected((prev) => !prev)}
-        >
-          {isSelected && <Check />}
-        </CheckBox>
-        <span>{item || children}</span>
-      </ListItemComponentContainer>
-    );
-  else
-    return (
-      <ListItemComponentContainer {...rest}>{item}</ListItemComponentContainer>
-    );
+>(({ children, item, type, isSelected, onClick, ...rest }, ref) => {
+  return (
+    <ListItemComponentContainer onClick={onClick} {...rest}>
+      <CheckBox isSelected={isSelected}>
+        {isSelected && <Check color="#fff" />}
+      </CheckBox>
+      <span>{item || children}</span>
+    </ListItemComponentContainer>
+  );
 });
 
 ListItemComponent.defaultProps = {

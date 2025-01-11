@@ -28,10 +28,12 @@
       "components/*": ["components/*"],
       "features/*": ["features/*"],
       "hooks/*": ["hooks/*"],
+      "layout/*": ["layout/*"],
       "pages/*": ["pages/*"],
       "services/*": ["services/*"],
       "store/*": ["store/*"],
-      "styles/*": ["styles/*"]
+      "styles/*": ["styles/*"],
+      "types/*": ["types/*"]
     }
   },
   "include": ["src", "backend"]
