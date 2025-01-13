@@ -1,6 +1,7 @@
 import FlexBox from "components/FlexBox";
 import Footer from "layout/Footer";
 import Header from "layout/Header";
+import DetailPage from "pages/DetailPage";
 import MainPage from "pages/MainPage";
 import ShopPage from "pages/ShopPage";
 import TestPage from "pages/TestPage";
@@ -28,6 +29,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/shop" element={<ShopPage />} />
+              <Route path="/detail" element={<DetailPage />} />
               <Route path="/test" element={<TestPage />} />
             </Routes>
           </MainContainer>

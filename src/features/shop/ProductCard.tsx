@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Product } from "types/Product";
 
@@ -60,14 +61,15 @@ const ProductSale = styled.p`
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <CardContainer>
-      <ProdudctImg src={product.image} alt={product.name} />
-      <ProductDesc>
-        <ProductFeat></ProductFeat>
-        <ProductName>{product.name}</ProductName>
-        <ProductCategory>{product.category}</ProductCategory>
-        <ProductColor>{product.color}</ProductColor>
-        <ProductPrice>{product.price.toLocaleString()} 원</ProductPrice>
-        {/* <div aria-label="현재 가격: 26,100 원, 정가: 29,000 원">
+      <Link to="/detail">
+        <ProdudctImg src={product.image} alt={product.name} />
+        <ProductDesc>
+          <ProductFeat></ProductFeat>
+          <ProductName>{product.name}</ProductName>
+          <ProductCategory>{product.category}</ProductCategory>
+          <ProductColor>{product.color}</ProductColor>
+          <ProductPrice>{product.price.toLocaleString()} 원</ProductPrice>
+          {/* <div aria-label="현재 가격: 26,100 원, 정가: 29,000 원">
           <div aria-hidden="true" data-testid="product-price-reduced">
             26,100 원
           </div>
@@ -75,8 +77,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             29,000 원
           </div>
         </div> */}
-        <ProductSale></ProductSale>
-      </ProductDesc>
+          <ProductSale></ProductSale>
+        </ProductDesc>
+      </Link>
     </CardContainer>
   );
 };
