@@ -1,5 +1,6 @@
+import { CarouselButton } from "components/CarouselButton";
 import FlexBox from "components/FlexBox";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { EmptySpace } from "styles/GlobalStyle";
@@ -77,6 +78,14 @@ const HeroImage = styled.img`
   opacity: 1;
   z-index: 0;
 `;
+
+const CarouselBtnWrapper = styled(FlexBox)`
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  gap: 8px;
+`;
+
 const ProductTitle = styled.div`
   max-width: 400px;
   grid-column: 7 / undefined;
@@ -104,11 +113,36 @@ const images = [
   "https://static.nike.com/a/images/t_default/80a73af7-3613-41d0-8af1-c301a889fe9a/AIR+FORCE+1+%28GS%29.png",
   "https://static.nike.com/a/images/t_default/2edebc96-64bd-43ed-8ccb-7c60a53eb6a8/AIR+FORCE+1+%28GS%29.png",
 ];
+
+const PREV: "prev" = "prev";
+const NEXT: "next" = "next";
+
 function DetailPage() {
-  const [curImg, setCurImg] = useState("");
-  useLayoutEffect(() => {
-    setCurImg(images[0]);
-  }, []);
+  const [curImg, setCurImg] = useState(0);
+
+  useEffect(() => {
+    console.log("##curImg", curImg);
+  }, [curImg]);
+
+  const handleClick = (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    type: typeof PREV | typeof NEXT
+  ) => {
+    e.preventDefault();
+
+    setCurImg((prev) => {
+      let result = 0;
+      if (type === PREV) {
+        if (prev === 0) result = images.length - 1;
+        else result = prev - 1;
+      } else {
+        if (prev === images.length - 1) result = 0;
+        else result = prev + 1;
+      }
+
+      return result;
+    });
+  };
   return (
     <MainContainer>
       <EmptySpace height={60} />
@@ -121,7 +155,17 @@ function DetailPage() {
               ))}
             </ThumbnailListContainer>
             <HeroImageContainer>
-              <HeroImage src={curImg} />
+              <HeroImage src={images[curImg]} />
+              <CarouselBtnWrapper>
+                {[PREV, NEXT].map((item) => (
+                  <CarouselButton
+                    type={item}
+                    disabled={false}
+                    onClick={(e) => handleClick(e, item)}
+                    size={36}
+                  />
+                ))}
+              </CarouselBtnWrapper>
             </HeroImageContainer>
           </ProductImageryWrapper>
         </ProductImagery>

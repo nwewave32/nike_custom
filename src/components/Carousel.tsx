@@ -1,11 +1,9 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { colorSet } from "styles/ColorSet";
-import { IconSvg, ItemTitle, SectionTitle } from "styles/GlobalStyle";
+import { ItemTitle, SectionTitle } from "styles/GlobalStyle";
+import { CarouselButton } from "./CarouselButton";
 import FlexBox from "./FlexBox";
 import LinkButton from "./LinkButton";
-
-const disabledColor = colorSet.secondary;
 
 const TitleWrapper = styled(FlexBox)`
   width: 100%;
@@ -17,32 +15,6 @@ const TitleWrapper = styled(FlexBox)`
 const ButtonWrapper = styled(FlexBox)`
   margin-left: 12px;
   gap: 12px;
-`;
-
-interface CarouselButtonProps {
-  type: "prev" | "next";
-  disabled: boolean;
-}
-
-const shouldForwardProps = (prop: string) => !["disabled"].includes(prop);
-
-const CarouselButton = styled.button.withConfig({
-  shouldForwardProp: shouldForwardProps,
-})<CarouselButtonProps>`
-  width: 48px;
-  height: 48px;
-  border-radius: 100%;
-  background-color: ${({ disabled }) =>
-    disabled ? disabledColor : colorSet.background3};
-
-  &:hover {
-    background-color: ${({ disabled }) =>
-      disabled ? disabledColor : colorSet.hoverColorOnDark};
-    transition: ${({ disabled }) =>
-      disabled
-        ? "none"
-        : "background-color 250ms cubic-bezier(0.25, 0.1, 0.25, 1)"};
-  }
 `;
 
 const CarouselContainer = styled.div`
@@ -108,10 +80,32 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
   const [curPos, setCurPos] = useState(0);
   const scrollAmount = (window.innerWidth - 48 * 2 - 12 * 2) / 3 + 12;
 
-  const [clickE, setClickE] = useState<
-    React.MouseEvent<HTMLElement, MouseEvent> | undefined
-  >(undefined);
+  const [buttonState, setButtonsState] = useState([
+    {
+      id: 0,
+      type: PREV,
+      isDisabled: false,
+    },
+    {
+      id: 1,
+      type: NEXT,
+      isDisabled: false,
+    },
+  ]);
 
+  useEffect(() => {
+    setButtonsState((prev) => {
+      return prev.map((item) => {
+        return {
+          ...item,
+          isDisabled:
+            item.type === PREV
+              ? curPos <= scrollAmount - 2
+              : curPos >= scrollAmount * Math.floor(images.length / 2) - 1,
+        };
+      });
+    });
+  }, [curPos, scrollAmount, images.length]);
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
 
@@ -121,20 +115,11 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
       console.log("##scrollAmount", scrollAmount);
 
       if (type === PREV) {
-        console.log("##1");
-        // setCurPos((prev) => Math.max(prev - scrollAmount, 0)); // 스크롤이 0 이하로 가지 않도록 제한
         container.scrollTo({
           left: Math.max(container.scrollLeft - scrollAmount, 0),
           behavior: "smooth",
         });
       } else if (type === NEXT) {
-        console.log("##2");
-        // setCurPos((prev) =>
-        //   Math.min(
-        //     prev + scrollAmount,
-        //     container.scrollWidth - container.offsetWidth
-        //   )
-        // );
         container.scrollTo({
           left: Math.min(
             container.scrollLeft + scrollAmount,
@@ -146,8 +131,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
     }
   };
 
-  const handleScroll = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    console.log("##e", e.currentTarget); //todo: 프레임 맞춰서 멈추기
+  const handleScroll = () => {
     const container = scrollRef.current;
     if (container) {
       const left = container.scrollLeft;
@@ -160,56 +144,24 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
       //   ),
       //   behavior: "smooth",
       // });
-      console.log("##3");
+
       setCurPos(left);
     }
   };
-
-  const prevDisabledStates = useMemo(() => {
-    return curPos <= scrollAmount - 2;
-  }, [curPos, scrollAmount]);
-
-  const nextDisabledStates = useMemo(() => {
-    return curPos >= scrollAmount * Math.floor(images.length / 2) - 1;
-  }, [curPos, scrollAmount, images.length]);
-
-  const getIsDisabled = useCallback(
-    (type: string) => {
-      return type === PREV ? prevDisabledStates : nextDisabledStates;
-    },
-    [prevDisabledStates, nextDisabledStates]
-  );
-
-  const MemoizedCarouselButton = memo(CarouselButton);
 
   return (
     <>
       <TitleWrapper justify="space-between">
         <SectionTitle>{title}</SectionTitle>
         <ButtonWrapper>
-          {[PREV, NEXT].map((item) => (
-            <MemoizedCarouselButton
-              type={item}
-              key={item}
-              disabled={getIsDisabled(item)}
+          {buttonState.map((item) => (
+            <CarouselButton
+              type={item.type}
+              key={item.type}
+              disabled={item.isDisabled}
               onClick={handleClick}
-            >
-              <IconSvg>
-                <path
-                  stroke={
-                    !getIsDisabled(item)
-                      ? "currentColor"
-                      : colorSet.disabledColor
-                  }
-                  strokeWidth="1.5"
-                  d={
-                    item === PREV
-                      ? "M15.525 18.966L8.558 12l6.967-6.967"
-                      : "M8.474 18.966L15.44 12 8.474 5.033"
-                  }
-                ></path>
-              </IconSvg>
-            </MemoizedCarouselButton>
+              size={48}
+            />
           ))}
         </ButtonWrapper>
       </TitleWrapper>
