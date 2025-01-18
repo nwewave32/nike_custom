@@ -1,6 +1,6 @@
 import ActionArrow from "components/ActionArrow";
 import FlexBox from "components/FlexBox";
-import { filters, products } from "features/shop/constant";
+import { filters, gara } from "features/shop/constant";
 import ProductGrid from "features/shop/ProductGrid";
 import Sidebar from "features/shop/Sidebar";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -173,7 +173,7 @@ function ShopPage() {
           setFilters={setSelectedFilters}
           isFilterShow={isFilterShow}
         />
-        <ProductGrid products={products} />
+        <ProductGrid products={gara} />
       </ResultBody>
     </MainContainer>
   );

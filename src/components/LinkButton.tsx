@@ -9,7 +9,7 @@ interface LinkButtonProps {
   children?: ReactNode;
   mode: "light" | "dark";
   href: string;
-  text: string;
+  text?: string;
 }
 
 const shouldForwardProp = (prop: string) => !["mode"].includes(prop);
@@ -50,7 +50,6 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
 LinkButton.defaultProps = {
   mode: "light",
   href: "",
-  text: "button",
 };
 
 export default LinkButton;

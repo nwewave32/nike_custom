@@ -62,12 +62,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <CardContainer>
       <Link to="/detail">
-        <ProdudctImg src={product.image} alt={product.name} />
+        <ProdudctImg src={product.image[0]} alt={product.title} />
         <ProductDesc>
           <ProductFeat></ProductFeat>
-          <ProductName>{product.name}</ProductName>
+          <ProductName>{product.title}</ProductName>
           <ProductCategory>{product.category}</ProductCategory>
-          <ProductColor>{product.color}</ProductColor>
+          <ProductColor>{`${product.sort.length}개 색상`}</ProductColor>
           <ProductPrice>{product.price.toLocaleString()} 원</ProductPrice>
           {/* <div aria-label="현재 가격: 26,100 원, 정가: 29,000 원">
           <div aria-hidden="true" data-testid="product-price-reduced">
