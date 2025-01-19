@@ -14,6 +14,7 @@ const CardContainer = styled.div`
 
 const ProdudctImg = styled.img`
   width: 100%;
+  background-color: #f5f5f5;
 `;
 
 const ProductDesc = styled.div`

@@ -1,3 +1,4 @@
+import Accordion from "components/Accordion";
 import { CarouselButton } from "components/CarouselButton";
 import FlexBox from "components/FlexBox";
 import LinkButton from "components/LinkButton";
@@ -279,6 +280,65 @@ const CustomButtonTitle = styled(FlexBox)`
   }
 `;
 
+const PickUpContainer = styled(FlexBox)`
+  width: 100%;
+  padding: 24px 0;
+`;
+
+const PickUpTitle = styled.div`
+  width: 100%;
+  font: var(--podium-cds-typography-body1-strong);
+`;
+
+const FindStoreButton = styled.button`
+  font-weight: 500;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font: var(--podium-cds-typography-body1-strong);
+  line-height: 1.5;
+  cursor: pointer;
+  box-shadow: rgb(17, 17, 17) 0px -1px 0px 0px inset;
+  padding: 2px 0;
+
+  border-radius: 0px;
+  transition: 0.2s;
+
+  &:hover {
+    box-shadow: rgb(17, 17, 17) 0px -1.5px 0px 0px inset;
+  }
+`;
+
+const FindStoreDesc = styled.div`
+  color: #707072;
+
+  margin-top: 20px;
+
+  display: inline-block;
+
+  font: var(--podium-cds-typography-body2);
+`;
+
+const ProductDescContainer = styled(FlexBox)`
+  padding-top: 28px;
+`;
+
+const ProductDesc = styled.p`
+  font: var(--podium-cds-typography-body1);
+  text-align: start;
+`;
+
+const ProductDescLi = styled.li`
+  display: list-item;
+  font: var(--podium-cds-typography-body1);
+  list-style: disc;
+  margin-left: 27px;
+  padding-bottom: 4px;
+`;
+
+const MoreDetailBtn = styled(FindStoreButton)`
+  margin-top: 30px;
+`;
+
 const PREV: "prev" = "prev";
 const NEXT: "next" = "next";
 
@@ -439,6 +499,101 @@ function DetailPage() {
               </CustomButtonTitle>
             </CustomButton>
           </ButtonWrapper>
+          <PickUpContainer direction="column" align="flex-start">
+            <PickUpTitle>무료 픽업</PickUpTitle>
+            <FindStoreButton>매장 찾기</FindStoreButton>
+            <FindStoreDesc>주문결제 시 매장 픽업 선택 가능</FindStoreDesc>
+          </PickUpContainer>
+          <ProductDescContainer direction="column" align="flex-start">
+            <ProductDesc>
+              40여 년 전 처음 출시되었을 때와 마찬가지로 오늘날에도 멋진 AF1은
+              믿을 수 있는 클래식 아이템입니다. 내구성이 뛰어난 구조와 에어
+              쿠셔닝, 접지력이 우수한 트레드로 휴식 중에도, 휴식 후에도 신기
+              좋습니다. 상자에서 꺼낸 새 상품도 훌륭하지만, 흠집이나 긁힌 자국이
+              생겨도 여전히 멋진 분위기를 유지합니다. 오히려 더 근사해질 수도
+              있죠.
+            </ProductDesc>
+            <br />
+            <ul>
+              <ProductDescLi>현재 컬러:화이트/매직 엠버</ProductDescLi>
+              <ProductDescLi>스타일 번호:FV5948-117</ProductDescLi>
+              <ProductDescLi>제조 국가/지역: 인도네시아</ProductDescLi>
+            </ul>
+          </ProductDescContainer>
+          <MoreDetailBtn>상품 상세 정보 보기</MoreDetailBtn>
+          <Accordion title="무료 배송 및 반품">
+            <FlexBox direction="column" align="flex-start">
+              <p>
+                <strong>일반 배송&nbsp;</strong>
+              </p>
+              <p>• 배송지역: 전국 (일부 지역 제외)</p>
+              <p>• 배송비: 무료배송</p>
+              <p>
+                • 제품 수령일로부터 14일 이내 제품에 대해서만 무료 반품 서비스가
+                가능합니다.
+              </p>
+              <p>• 나이키는 교환 서비스를 제공하지 않습니다.</p>
+              <p>
+                일반 배송
+                <u>
+                  <a href="https://www.nike.com/kr/help/a/shipping-delivery-kr">
+                    자세히 알아보기
+                  </a>
+                </u>
+              </p>
+              <p>
+                반품
+                <u>
+                  <a href="https://www.nike.com/kr/help/a/how-to-return-kr">
+                    자세히 알아보기
+                  </a>
+                </u>
+              </p>
+              <p>
+                <br />
+              </p>
+              <p>
+                <strong>오늘도착 서비스</strong>
+              </p>
+              <p>
+                • 이용시간: 오전 10시 30분까지 결제 시, 당일 도착 (일요일,
+                공휴일 제외)
+              </p>
+              <p>
+                • 서비스지역: 서울∙과천∙의왕∙군포∙수원∙성남∙안양시 전체, 용인시
+                수지구∙기흥구, 부천시 중동∙상동∙심곡동
+              </p>
+              <p>• 서비스비용: 5,000원</p>
+              <p>
+                <u>
+                  <a href="https://www.nike.com/kr/help/a/shipping-delivery-kr">
+                    자세히 알아보기
+                  </a>
+                </u>
+              </p>
+              <p>&nbsp;</p>
+              <p>
+                <strong>A/S 안내&nbsp;</strong>
+              </p>
+              <p>
+                • 나이키 온라인에서 구매하신 제품에 대한 A/S 는 나이키코리아
+                고객센터(
+                <u>
+                  <b>
+                    <a href="tel:080-022-0182">080-022-0182</a>
+                  </b>
+                </u>
+                )에서 유선으로만 접수 가능합니다.
+              </p>
+              <p>
+                <u>
+                  <a href="https://www.nike.com/kr/help/a/a-s-apply-kr">
+                    자세히 알아보기
+                  </a>
+                </u>
+              </p>
+            </FlexBox>
+          </Accordion>
         </ProductDetail>
       </DetailContainer>
     </MainContainer>
