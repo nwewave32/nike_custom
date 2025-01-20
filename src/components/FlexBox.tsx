@@ -12,6 +12,7 @@ interface FlexBoxProps extends HTMLProps<HTMLDivElement> {
     | "space-around"
     | "space-between"
     | "space-evenly";
+  isFull?: boolean;
 }
 
 const direction = ({ direction }: FlexBoxProps) => {
@@ -28,6 +29,10 @@ const justify = ({ justify }: FlexBoxProps) => {
     : `justify-content: flex-start;`;
 };
 
+const full = ({ isFull }: FlexBoxProps) => {
+  return isFull && `width: 100%;`;
+};
+
 const shouldForwardProp = (prop: string) =>
   !["direction", "align", "justify"].includes(prop);
 
@@ -40,6 +45,7 @@ const FlexBoxContainer = styled.div.withConfig({
   ${direction}
   ${align}
   ${justify}
+  ${full}
 `;
 
 export const FlexBox = forwardRef<HTMLDivElement, FlexBoxProps>(

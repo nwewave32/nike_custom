@@ -1,10 +1,12 @@
 import { forwardRef, ReactNode, useState } from "react";
 import styled from "styled-components";
 import FlexBox from "./FlexBox";
+import StarScore from "./StarScore";
 
 interface AccordionProps {
   children?: ReactNode;
   title: string;
+  score?: number;
 }
 
 const AccordionContainer = styled(FlexBox)`
@@ -33,15 +35,18 @@ const AccordionSummaryIcon = styled.svg.withConfig({
 })<AccordionSummaryIconProps>`
   margin-left: 12px;
 
-  transform: ${({ isOpen }) => (isOpen ? "rotate(-180deg)" : "rotate(0deg)")}
+  transform: ${({ isOpen }) => (!isOpen ? "rotate(-180deg)" : "rotate(0deg)")}
     rotate(-180deg);
   transition: transform 250ms cubic-bezier(0.86, 0, 0.07, 1);
 `;
 
-const AccordionContentWrapper = styled(FlexBox)``;
+const AccordionContentWrapper = styled(FlexBox)`
+  padding-bottom: 30px;
+  width: 100%;
+`;
 
 export const Accordion = forwardRef<HTMLAnchorElement, AccordionProps>(
-  ({ title, children, ...rest }, ref) => {
+  ({ title, children, score, ...rest }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <AccordionContainer direction="column" align="flex-start">
@@ -51,6 +56,7 @@ export const Accordion = forwardRef<HTMLAnchorElement, AccordionProps>(
         >
           <AccordionTitle>{title}</AccordionTitle>
           <AccordionSummaryWrapper>
+            {score && <StarScore score={score} />}
             <AccordionSummaryIcon
               aria-hidden="true"
               focusable="false"
