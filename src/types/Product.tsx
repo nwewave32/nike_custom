@@ -9,9 +9,10 @@ export interface Product {
   sale?: number;
   image: string[]; // 이미지 URL
   size: number[];
+  thumnails: string[];
 }
 
-interface Sort {
+export interface Sort {
   id: number;
   name: string;
   url: string;

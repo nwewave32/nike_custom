@@ -244,6 +244,16 @@ export const gara: Product[] = [
     ],
     size: [225, 230, 235, 240, 245, 250],
     image: [
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/0745eae3-6834-4a84-b310-8d66651f7472/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/bc329c33-aea4-4973-a0d5-72fe9fbd656d/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/0d4de4aa-5ecc-49cc-b1ca-6ab92b995c91/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/87dc7c07-7789-4a8f-b23f-9da40330c1d7/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/2cfc74b0-79b5-422c-afcd-b8c35dcd1261/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/6939e63a-4255-4341-9a68-eefaae84aeb8/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c3a549ee-f7ab-4ed2-ae0c-6aaddce2a87f/AIR+FORCE+1+%28GS%29.png",
+      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/84561e9c-59a8-4165-9eca-3be564c75ccb/AIR+FORCE+1+%28GS%29.png",
+    ],
+    thumnails: [
       "https://static.nike.com/a/images/t_default/9c6a501e-7115-40ea-bb34-bce20a68c742/AIR+FORCE+1+%28GS%29.png",
       "https://static.nike.com/a/images/t_default/777a4118-299c-4d26-a383-a71ae8bc2265/AIR+FORCE+1+%28GS%29.png",
       "https://static.nike.com/a/images/t_default/7d830ce8-8dc3-4640-96c6-3070ce6ab638/AIR+FORCE+1+%28GS%29.png",

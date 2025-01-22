@@ -5,10 +5,11 @@ import LinkButton from "components/LinkButton";
 import StarScore from "components/StarScore";
 import { reviews } from "features/detail/constant";
 import { gara } from "features/shop/constant";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { EmptySpace } from "styles/GlobalStyle";
+import { Sort } from "types/Product";
 import { Review } from "types/Review";
 
 const MainContainer = styled.div`
@@ -60,6 +61,7 @@ const Thumbnail = styled.img`
   width: 60px;
   background-color: #f5f5f5;
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 const HeroImageContainer = styled(FlexBox)`
@@ -74,16 +76,22 @@ const HeroImageContainer = styled(FlexBox)`
   box-sizing: border-box;
 `;
 
-const HeroImage = styled.img`
+const HeroImageWrapper = styled.div`
   width: 100%;
   aspect-ratio: 1 / 1.25;
-
+`;
+const HeroImage = styled.img`
+  width: 100%;
   background-color: #f5f5f5;
 
+  position: absolute;
+  top: 0;
+  left: 0;
+  aspect-ratio: 1 / 1.25;
   opacity: 1;
   z-index: 0;
-  overflow-clip-margin: content-box;
-  overflow: clip;
+
+  max-width: 100%;
 `;
 
 const CarouselBtnWrapper = styled(FlexBox)`
@@ -148,9 +156,11 @@ const PickerItemWrapper = styled.div`
 
 interface PickerItemProps {
   isSoldOut: boolean;
+  isSelected: boolean;
 }
 
-const shouldForwardProp = (prop: string) => !["isSoldOut"].includes(prop);
+const shouldForwardProp = (prop: string) =>
+  !["isSoldOut", "isSelected"].includes(prop);
 
 const PickerItem = styled.img.withConfig({
   shouldForwardProp,
@@ -172,6 +182,12 @@ const PickerItem = styled.img.withConfig({
     border: 1px solid #111;
     border-radius: 5px;
   }
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      border: 1px solid #111;
+      border-radius: 5px;
+    `}
 `;
 
 const SoldOutSlash = styled.div`
@@ -233,7 +249,13 @@ const ProductSizePicker = styled.div`
   width: 100%;
 `;
 
-const ProductSizeItem = styled(FlexBox)`
+interface ProductSizeItemProps {
+  isSelected: boolean;
+}
+
+const ProductSizeItem = styled(FlexBox).withConfig({
+  shouldForwardProp: (prop: string) => prop !== "isSelected",
+})<ProductSizeItemProps>`
   grid-column: span 1;
   -webkit-box-align: center;
   align-items: center;
@@ -248,6 +270,7 @@ const ProductSizeItem = styled(FlexBox)`
   &:hover {
     border: 1px solid #111;
   }
+  ${({ isSelected }) => isSelected && `border: 1px solid #111;`}
 `;
 
 const ButtonWrapper = styled(FlexBox)`
@@ -349,10 +372,14 @@ const item = gara[0];
 
 function DetailPage() {
   const [curImg, setCurImg] = useState(0);
+  const [selectedSize, setSelectedSize] = useState(0);
+  const [selectedSort, setSelectedSort] = useState<null | Sort>();
 
-  useEffect(() => {
-    console.log("##curImg", curImg);
-  }, [curImg]);
+  useLayoutEffect(() => {
+    setSelectedSort(() => {
+      return item.sort[20];
+    });
+  }, []);
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
@@ -385,12 +412,14 @@ function DetailPage() {
         <ProductImagery>
           <ProductImageryWrapper justify="flex-end" align="flex-start">
             <ThumbnailListContainer direction="column">
-              {item.image.map((image) => (
-                <Thumbnail src={image} />
+              {item.thumnails.map((image, idx) => (
+                <Thumbnail src={image} onClick={() => setCurImg(idx)} />
               ))}
             </ThumbnailListContainer>
             <HeroImageContainer align="flex-start">
-              <HeroImage src={item.image[curImg]} />
+              <HeroImageWrapper>
+                <HeroImage src={item.image[curImg]} />
+              </HeroImageWrapper>
               <CarouselBtnWrapper>
                 {[PREV, NEXT].map((item) => (
                   <CarouselButton
@@ -415,6 +444,10 @@ function DetailPage() {
               {item.sort.map((item, idx) => (
                 <PickerItemWrapper>
                   <PickerItem
+                    isSelected={
+                      selectedSort ? item.id === selectedSort.id : false
+                    }
+                    onClick={() => setSelectedSort(item)}
                     isSoldOut={item.soldOut}
                     src={item.url}
                     alt={item.name}
@@ -470,7 +503,12 @@ function DetailPage() {
             </ProductSizeTitleWrapper>
             <ProductSizePicker>
               {item.size.map((size) => (
-                <ProductSizeItem>{size}</ProductSizeItem>
+                <ProductSizeItem
+                  isSelected={size === selectedSize}
+                  onClick={() => setSelectedSize(size)}
+                >
+                  {size}
+                </ProductSizeItem>
               ))}
             </ProductSizePicker>
           </ProductSizeContainer>
@@ -518,7 +556,7 @@ function DetailPage() {
             </ProductDesc>
             <br />
             <ul>
-              <ProductDescLi>현재 컬러:화이트/매직 엠버</ProductDescLi>
+              <ProductDescLi>{`현재 컬러:${selectedSort ? selectedSort.name : "화이트/매직 엠버"}`}</ProductDescLi>
               <ProductDescLi>스타일 번호:FV5948-117</ProductDescLi>
               <ProductDescLi>제조 국가/지역: 인도네시아</ProductDescLi>
             </ul>
@@ -537,6 +575,7 @@ function DetailPage() {
           </Accordion>
         </ProductDetail>
       </DetailContainer>
+      <EmptySpace height={500} />
     </MainContainer>
   );
 }
@@ -683,10 +722,13 @@ const AdditionalInfo = () => {
 
 const ReviewItemContainer = styled(FlexBox)`
   width: 100%;
+  font: var(--podium-cds-typography-body1);
+  padding-bottom: var(--podium-cds-size-spacing-l);
 `;
 
 const ReviewTitle = styled.p`
   font: var(--podium-cds-typography-body1-strong);
+
   margin-bottom: 8px;
 `;
 
@@ -695,17 +737,42 @@ const ReviewSubTitle = styled.p`
   color: #707072;
 `;
 
-const ReviewContentWrapper = styled.div`
+const ReviewContentContainer = styled.div`
   width: 100%;
-  margin: 16px 0;
-  font: var(--podium-cds-typography-body1);
-  height: 78px;
-  overflow: hidden;
-  transition: height 0.9s;
+  margin-top: 16px;
+  min-height: 78px;
 `;
 
-const UnderlinedButton = styled.button``;
-const MoreButton = styled.button``;
+interface ReviewContentWrapperProps {
+  isOverflow: boolean;
+}
+
+const ReviewContentWrapper = styled.div.withConfig({
+  shouldForwardProp: (prop: string) => prop !== "isOverflow",
+})<ReviewContentWrapperProps>`
+  width: 100%;
+
+  font: var(--podium-cds-typography-body1);
+  height: auto;
+  ${({ isOverflow }) =>
+    isOverflow &&
+    css`
+      height: 78px;
+      overflow: hidden;
+      transition: height 0.9s;
+    `}
+`;
+
+const UnderlinedButton = styled.button`
+  border-bottom: var(--podium-cds-size-border-width-m) solid
+    var(--podium-cds-color-text-primary);
+  box-shadow: inset 0 var(--podium-cds-button-box-shadow-width) 0 0
+    var(--podium-cds-color-text-primary);
+
+  font: var(--podium-cds-typography-body1-strong);
+  margin-bottom: 16px;
+  cursor: pointer;
+`;
 
 interface ReviewItemProps {
   item: Review;
@@ -713,6 +780,17 @@ interface ReviewItemProps {
 
 const ReviewItem = ({ item }: ReviewItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOverflow, setIsOverflow] = useState(false);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    setIsOverflow(() => {
+      if (contentRef.current) {
+        return contentRef.current.offsetHeight > 78;
+      } else return false;
+    });
+  }, []);
+
   return (
     <ReviewItemContainer direction="column" align="flex-start">
       <ReviewTitle>{item.title}</ReviewTitle>
@@ -722,8 +800,22 @@ const ReviewItem = ({ item }: ReviewItemProps) => {
           {item.author + " - " + item.date.toLocaleDateString()}
         </ReviewSubTitle>
       </FlexBox>
-      <ReviewContentWrapper>{item.content}</ReviewContentWrapper>
-      <MoreButton>{isOpen ? "숨기기" : "더 보기"}</MoreButton>
+      <ReviewContentContainer>
+        <ReviewContentWrapper ref={contentRef} isOverflow={isOverflow}>
+          {item.content}
+        </ReviewContentWrapper>
+      </ReviewContentContainer>
+
+      {(isOverflow || isOpen) && (
+        <UnderlinedButton
+          onClick={() => {
+            setIsOpen((prev) => !prev);
+            setIsOverflow((prev) => !prev);
+          }}
+        >
+          {isOpen ? "숨기기" : "더 보기"}
+        </UnderlinedButton>
+      )}
     </ReviewItemContainer>
   );
 };
@@ -732,21 +824,34 @@ const ReviewContainer = styled(FlexBox)`
   width: 100%;
 `;
 
+const ScoreSpan = styled.span`
+  font: var(--podium-cds-typography-body1);
+  margin-left: 16px;
+`;
 interface ReviewSectionProps {
   score: number;
 }
 const ReviewSection = ({ score }: ReviewSectionProps) => {
   return (
     <ReviewContainer direction="column" align="flex-start">
-      <FlexBox>
-        <StarScore score={score} />
-        <p>{score}점</p>
+      <FlexBox direction="column" align="flex-start">
+        <FlexBox style={{ marginBottom: "8px" }}>
+          <StarScore score={score} />
+          <ScoreSpan>{score}점</ScoreSpan>
+        </FlexBox>
+        <UnderlinedButton style={{ marginBottom: "48px" }}>
+          리뷰 작성하기
+        </UnderlinedButton>
       </FlexBox>
+
       <>
         {reviews.map((review) => (
           <ReviewItem item={review} />
         ))}
       </>
+      <UnderlinedButton style={{ marginBottom: "48px" }}>
+        리뷰 더 보기
+      </UnderlinedButton>
     </ReviewContainer>
   );
 };
