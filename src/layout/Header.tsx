@@ -568,7 +568,6 @@ const Header: React.FC = () => {
   }, [isHover]);
 
   useEffect(() => {
-    console.log("##?", isHover);
     setIsHover(false);
   }, [window.location.href]);
 

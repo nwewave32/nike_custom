@@ -34,7 +34,7 @@ const full = ({ isFull }: FlexBoxProps) => {
 };
 
 const shouldForwardProp = (prop: string) =>
-  !["direction", "align", "justify"].includes(prop);
+  !["direction", "align", "justify", "isFull"].includes(prop);
 
 const FlexBoxContainer = styled.div.withConfig({
   shouldForwardProp,

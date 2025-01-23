@@ -8,9 +8,12 @@ import { gara } from "features/shop/constant";
 import { useLayoutEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { colorSet } from "styles/ColorSet";
-import { EmptySpace } from "styles/GlobalStyle";
+import { EmptySpace, SwooshSvg } from "styles/GlobalStyle";
 import { Sort } from "types/Product";
 import { Review } from "types/Review";
+
+import { Center, OrbitControls, useGLTF } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 const MainContainer = styled.div`
   width: 100vw;
@@ -80,6 +83,21 @@ const HeroImageWrapper = styled.div`
   width: 100%;
   aspect-ratio: 1 / 1.25;
 `;
+
+const HeroImageCopy = styled.div`
+  width: 100%;
+  background-color: #f5f5f5;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  aspect-ratio: 1 / 1.25;
+  opacity: 1;
+  z-index: 0;
+
+  max-width: 100%;
+`;
+
 const HeroImage = styled.img`
   width: 100%;
   background-color: #f5f5f5;
@@ -213,7 +231,7 @@ const SoldOutLine = styled.line`
   z-index: 3;
   shape-rendering: crispEdges;
   stroke: #ffffff;
-  stroke-width: 1.5px;
+  strokewidth: 1.5px;
 `;
 
 const ProductSizeContainer = styled(FlexBox)`
@@ -405,6 +423,7 @@ function DetailPage() {
     const priceStr = price.toString();
     return priceStr.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원";
   };
+
   return (
     <MainContainer>
       <EmptySpace height={60} />
@@ -412,8 +431,14 @@ function DetailPage() {
         <ProductImagery>
           <ProductImageryWrapper justify="flex-end" align="flex-start">
             <ThumbnailListContainer direction="column">
+              {/* <img data-testid="Thumbnail-Img-0" src="https://static.nike.com/a/images/t_default/4f37fca8-6bce-43e7-ad07-f57ae3c13142/AIR+FORCE+1+%2707.png" alt="나이키 에어 포스 1 '07 남성 신발"> */}
+
               {item.thumnails.map((image, idx) => (
-                <Thumbnail src={image} onClick={() => setCurImg(idx)} />
+                <Thumbnail
+                  key={"thumnail" + idx + 1}
+                  src={image}
+                  onClick={() => setCurImg(idx)}
+                />
               ))}
             </ThumbnailListContainer>
             <HeroImageContainer align="flex-start">
@@ -423,6 +448,7 @@ function DetailPage() {
               <CarouselBtnWrapper>
                 {[PREV, NEXT].map((item) => (
                   <CarouselButton
+                    key={item}
                     type={item}
                     disabled={false}
                     onClick={(e) => handleClick(e, item)}
@@ -442,7 +468,7 @@ function DetailPage() {
           <ProductColorContainer>
             <PickerWrapper>
               {item.sort.map((item, idx) => (
-                <PickerItemWrapper>
+                <PickerItemWrapper key={item.name}>
                   <PickerItem
                     isSelected={
                       selectedSort ? item.id === selectedSort.id : false
@@ -489,12 +515,12 @@ function DetailPage() {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     d="M21.75 10.5v6.75a1.5 1.5 0 01-1.5 1.5H3.75a1.5 1.5 0 01-1.5-1.5V10.5m3.308-2.25h12.885"
                   ></path>
                   <path
                     stroke="currentColor"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     d="M15.79 5.599l2.652 2.65-2.652 2.653M8.21 5.599l-2.652 2.65 2.652 2.653M17.25 19v-2.5M12 19v-2.5M6.75 19v-2.5"
                   ></path>
                 </svg>
@@ -504,6 +530,7 @@ function DetailPage() {
             <ProductSizePicker>
               {item.size.map((size) => (
                 <ProductSizeItem
+                  key={size}
                   isSelected={size === selectedSize}
                   onClick={() => setSelectedSize(size)}
                 >
@@ -575,12 +602,73 @@ function DetailPage() {
           </Accordion>
         </ProductDetail>
       </DetailContainer>
-      <EmptySpace height={500} />
+      <EmptySpace height={50} />
+      <FlexBox
+        justify="center"
+        isFull={true}
+        style={{ minHeight: "500px", padding: "0 120px" }}
+      >
+        <FlexBox
+          isFull={true}
+          style={{
+            height: "500px",
+          }}
+        >
+          <NikeBackground>
+            <SwooshSvg
+              aria-hidden="true"
+              focusable="false"
+              viewBox="0 0 24 24"
+              role="img"
+              width="24px"
+              height="24px"
+              fill="none"
+            >
+              <path
+                fill="rgba(0,0,0,0.3)"
+                fillRule="evenodd"
+                d="M21 8.719L7.836 14.303C6.74 14.768 5.818 15 5.075 15c-.836 0-1.445-.295-1.819-.884-.485-.76-.273-1.982.559-3.272.494-.754 1.122-1.446 1.734-2.108-.144.234-1.415 2.349-.025 3.345.275.2.666.298 1.147.298.386 0 .829-.063 1.316-.19L21 8.719z"
+                clipRule="evenodd"
+              ></path>
+            </SwooshSvg>
+          </NikeBackground>
+          <Toast>화면을 드래그하거나 스크롤 해보세요!</Toast>
+          <Canvas camera={{ position: [-20, 20, -20], fov: 50 }}>
+            <ambientLight intensity={0.5} />
+
+            <pointLight position={[10, 10, 10]} />
+            <OrbitControls />
+
+            <Model />
+          </Canvas>
+        </FlexBox>
+      </FlexBox>
+
+      <EmptySpace height={50} />
     </MainContainer>
   );
 }
 
 export default DetailPage;
+
+const Toast = styled.div``;
+const NikeBackground = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  position: absolute;
+  top: 0;
+`;
+
+function Model() {
+  const gltf = useGLTF("/nike_air_force_1_white_on_white_1.glb");
+
+  return (
+    <Center scale={2}>
+      <primitive object={gltf.scene} position={[0, 0, 0]} />
+    </Center>
+  );
+}
 
 const GuideContainer = styled(FlexBox)`
   font: var(--podium-cds-typography-body1);

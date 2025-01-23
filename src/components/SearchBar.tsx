@@ -151,7 +151,7 @@ const SearchBar: React.FC = () => {
         )}
         {/* <div class="search-end-icon-container">
                     <button aria-label="검색 초기화" class="nds-btn nds-button--icon-only search-end-btn css-1pto8ls ex41m6f0 btn-secondary-dark " type="button" id="nav-search-end-icon">
-                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none"><path stroke="currentColor" stroke-width="1.5" d="M18.973 5.027L5.028 18.972m0-13.945l13.944 13.945">
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none"><path stroke="currentColor" strokeWidth="1.5" d="M18.973 5.027L5.028 18.972m0-13.945l13.944 13.945">
                             </path>
                         </svg>
                         <span class="ripple">

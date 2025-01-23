@@ -69,7 +69,7 @@ export const Accordion = forwardRef<HTMLAnchorElement, AccordionProps>(
             >
               <path
                 stroke="currentColor"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 d="M18.966 8.476L12 15.443 5.033 8.476"
               ></path>
             </AccordionSummaryIcon>
