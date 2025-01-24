@@ -1,4 +1,5 @@
 import { forwardRef, ReactNode } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { colorSet } from "styles/ColorSet";
 
@@ -8,13 +9,13 @@ const DARK_MODE = "dark";
 interface LinkButtonProps {
   children?: ReactNode;
   mode: "light" | "dark";
-  href: string;
+  to: string;
   text?: string;
 }
 
 const shouldForwardProp = (prop: string) => !["mode"].includes(prop);
 
-const LinkButtonContainer = styled.a.withConfig({
+const LinkButtonContainer = styled(Link).withConfig({
   shouldForwardProp,
 })<Omit<LinkButtonProps, "text">>`
   font: var(--podium-cds-typography-body1-strong);
@@ -38,9 +39,9 @@ const LinkButtonContainer = styled.a.withConfig({
 `;
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
-  ({ children, text, ...rest }, ref) => {
+  ({ children, text, to, ...rest }, ref) => {
     return (
-      <LinkButtonContainer ref={ref} {...rest}>
+      <LinkButtonContainer to={to} ref={ref} {...rest}>
         {text || children}
       </LinkButtonContainer>
     );
@@ -49,7 +50,6 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
 
 LinkButton.defaultProps = {
   mode: "light",
-  href: "",
 };
 
 export default LinkButton;

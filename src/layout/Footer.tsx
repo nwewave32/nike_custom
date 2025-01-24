@@ -169,7 +169,7 @@ const Footer: React.FC = () => {
           "위치정보이용약관",
           "영상정보처리기기 운영 방침",
         ].map((item) => (
-          <a data-testid="link" href="/test" key={item}>
+          <a data-testid="link" href="#" key={item}>
             <SubFooterSpan>{item}</SubFooterSpan>
           </a>
         ))}
@@ -190,7 +190,7 @@ const Footer: React.FC = () => {
               data-var="koreanBusinessInfoLink"
               target="_blank"
               data-testid="link"
-              href="/test"
+              href="#"
             >
               사업자 정보 확인
             </LegalFooterAnchor>
@@ -201,7 +201,7 @@ const Footer: React.FC = () => {
               <LegalFooterAnchor
                 data-var="koreanCustomerServicePhone"
                 data-testid="link"
-                href="/test"
+                href="#"
               >
                 080-022-0182
               </LegalFooterAnchor>

@@ -269,10 +269,10 @@ function FormSection({ item, selectedSort, onClick }: FormSectionProps) {
         </ProductSizePicker>
       </ProductSizeContainer>
       <ButtonWrapper direction="column">
-        <CustomButton mode="light" href="#">
+        <CustomButton mode="light" to="#">
           <CustomButtonTitle justify="center">장바구니</CustomButtonTitle>
         </CustomButton>
-        <CustomButton mode="dark" href="#">
+        <CustomButton mode="dark" to="#">
           <CustomButtonTitle justify="center">
             <span>위시리스트</span>
 

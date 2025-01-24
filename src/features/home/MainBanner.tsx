@@ -79,7 +79,7 @@ const MainBanner: React.FC = () => {
             불타는 열정을 새로운 기록으로 바꿔줄 에키덴 팩을 만나 보세요.
           </Paragraph>
           <ButtonWrapper>
-            <LinkButton mode="light" href="/shop" text="구매하기" />
+            <LinkButton mode="light" to="/shop" text="구매하기" />
           </ButtonWrapper>
         </BannerLogoWrapper>
       </BannerWrapper>

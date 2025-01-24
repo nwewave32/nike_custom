@@ -184,7 +184,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
                   <LinkButton
                     mode="dark"
                     text={image?.buttonTitle ? image.buttonTitle : "구매하기"}
-                    href="/shop"
+                    to="/shop"
                   />
                 </ButtonWrapper>
               </DescWrapper>
