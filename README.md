@@ -1,50 +1,35 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 👟 나이키 + 3D
 
-Currently, two official plugins are available:
+이 프로젝트는 **타입스크립트**와 **리액트**로 제작된 웹 애플리케이션입니다. **Three.js**를 활용하여 3D 신발을 소개하고, 이를 통해 사용자에게 인터랙티브한 경험을 제공합니다. 기본적인 디자인은 **Nike** 웹사이트를 참고하여 클론한 형태로, 상품 페이지에서는 신발을 3D로 자세히 볼 수 있는 기능을 제공합니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 기술 스택
 
-## Expanding the ESLint configuration
+- **React** (라이브러리)
+- **TypeScript** (타입 안정성을 위한 언어)
+- **Three.js** (3D 모델링 및 인터랙션)
+- **Styled-components** (스타일링)
+- **Vercel** (배포)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🚀 주요 기능
 
-- Configure the top-level `parserOptions` property like this:
+- **3D 신발 보기**: 상품 페이지에서 3D 신발을 회전, 확대/축소 등의 인터랙션을 통해 다양한 각도에서 볼 수 있습니다.
+- **나이키 사이트 클론**: 사이트의 기본적인 디자인과 레이아웃은 나이키의 공식 웹사이트에서 영감을 받아 클론하였으며, 직관적이고 깔끔한 사용자 인터페이스(UI)를 제공합니다.
+- **반응형 웹 디자인**: 다양한 화면 크기에 대응하는 반응형 디자인을 통해 데스크탑과 모바일에서 모두 최적화된 사용자 경험을 제공합니다.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🔧 설치 및 실행
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+https://nike-custom-gamma.vercel.app/
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🎯 프로젝트 목표
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+이 프로젝트의 주요 목표는 **3D 신발 모델**을 상품 페이지에 통합하여 사용자가 제품을 다양한 각도에서 실시간으로 볼 수 있도록 하는 것입니다. 이를 통해 고객이 상품에 대해 더욱 직관적인 이해를 할 수 있도록 돕는 인터랙티브한 경험을 제공하고자 했습니다.
+
+
+## 🤍 기여하기 (Contributing)
+포트폴리오 개선을 위한 피드백이나 코드 개선 제안은 언제든 환영합니다.
+
+## 📄 라이선스 (License)
+이 포트폴리오는 개인용으로 제작되었습니다.
+
+---
