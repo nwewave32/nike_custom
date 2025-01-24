@@ -66,6 +66,17 @@ const Thumbnail = styled.img`
   cursor: pointer;
 `;
 
+const ThumbnailCover = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 60px;
+  width: 60px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+`;
+
 const HeroImageContainer = styled(FlexBox)`
   max-width: 535px;
   border-radius: 8px;
@@ -180,14 +191,18 @@ function DetailPage() {
         <ProductImagery>
           <ProductImageryWrapper justify="flex-end" align="flex-start">
             <ThumbnailListContainer direction="column">
-              {/* <img data-testid="Thumbnail-Img-0" src="https://static.nike.com/a/images/t_default/4f37fca8-6bce-43e7-ad07-f57ae3c13142/AIR+FORCE+1+%2707.png" alt="나이키 에어 포스 1 '07 남성 신발"> */}
-
               {item.thumnails.map((image, idx) => (
-                <Thumbnail
+                <FlexBox
                   key={"thumnail" + idx + 1}
-                  src={image}
-                  onClick={() => setCurImg(idx)}
-                />
+                  style={{ position: "relative" }}
+                >
+                  <Thumbnail
+                    src={image}
+                    onClick={() => setCurImg(idx)}
+                    onMouseOver={() => setCurImg(idx)}
+                  />
+                  {idx === curImg && <ThumbnailCover />}
+                </FlexBox>
               ))}
             </ThumbnailListContainer>
             <HeroImageContainer align="flex-start">
