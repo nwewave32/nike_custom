@@ -7,6 +7,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { colorSet } from "styles/ColorSet";
 import { EmptySpace } from "styles/GlobalStyle";
+import { Product } from "types/Product";
 
 const MainContainer = styled.div`
   background-color: ${colorSet.primaryOnDark};
@@ -80,9 +81,29 @@ function ShopPage() {
   const wallHeaderRef = useRef(null);
   const selectRef = useRef<HTMLDivElement | null>(null);
   const [selectedFilters, setSelectedFilters] = useState(filters);
+  const [filteredItems, setFilteredItems] = useState<Product[] | []>(gara);
 
   useEffect(() => {
     console.log("##selectedFilters", selectedFilters);
+
+    const prices = selectedFilters.price.items.filter(
+      (item) => item.isSelected
+    );
+
+    console.log("##prices", prices);
+    setFilteredItems(() => {
+      let temp: Product[] = [];
+      if (prices.length === 0) return gara;
+      gara.forEach((product) => {
+        prices.forEach((priceItem) => {
+          const minPrice = priceItem.id * 50000;
+          const maxPrice = priceItem.id * 50000 + 50000;
+          if (product.price >= minPrice && product.price <= maxPrice)
+            temp.push(product);
+        });
+      });
+      return temp;
+    });
   }, [selectedFilters]);
 
   useLayoutEffect(() => {
@@ -173,7 +194,13 @@ function ShopPage() {
           setFilters={setSelectedFilters}
           isFilterShow={isFilterShow}
         />
-        <ProductGrid products={gara} />
+        {filteredItems.length === 0 ? (
+          <FlexBox isFull={true} justify="center" style={{ padding: "30px" }}>
+            준비된 상품이 없습니다.
+          </FlexBox>
+        ) : (
+          <ProductGrid products={filteredItems} />
+        )}
       </ResultBody>
     </MainContainer>
   );

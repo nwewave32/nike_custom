@@ -62,7 +62,7 @@ const ProductSale = styled.p`
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <CardContainer>
-      <Link to="/detail">
+      <Link to={`/detail/${product.id}`}>
         <ProdudctImg src={product.image[0]} alt={product.title} />
         <ProductDesc>
           <ProductFeat></ProductFeat>

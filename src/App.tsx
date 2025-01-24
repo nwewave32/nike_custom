@@ -15,6 +15,9 @@ const AppContainer = styled(FlexBox)`
 
 const MainContainer = styled.main`
   flex: 1;
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
 
 function App() {
@@ -29,7 +32,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/shop" element={<ShopPage />} />
-              <Route path="/detail" element={<DetailPage />} />
+              <Route path="/detail/:id" element={<DetailPage />} />
               <Route path="/test" element={<TestPage />} />
             </Routes>
           </MainContainer>
