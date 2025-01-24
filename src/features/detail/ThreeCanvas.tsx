@@ -48,7 +48,7 @@ const Toast = styled.div`
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 24px;
-  color: #f5f5f5;
+  color: var(--podium-cds-color-grey-100);
   background-color: #000;
   border-radius: 10px;
   opacity: 0.3;
@@ -59,7 +59,7 @@ const Toast = styled.div`
 const NikeBackground = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
   position: absolute;
   top: 0;
 `;

@@ -107,7 +107,7 @@ const AdditionalInfoContainer = styled(GuideContainer)`
     font-weight: 500;
     font-family: "Noto Sans KR Medium", "Arial Bold", "Helvetica Now Text",
       Helvetica, Arial, Dotum, "êµ­ì–´", Gulim, sans-serif;
-    box-shadow: inset 0 -1px 0 0 #111;
+    box-shadow: inset 0 -1px 0 0 var(--podium-cds-color-black);
     padding-bottom: 4px;
   }
 `;
@@ -178,7 +178,7 @@ const ReviewTitle = styled.p`
 
 const ReviewSubTitle = styled.p`
   font: var(--podium-cds-typography-body1);
-  color: #707072;
+  color: var(--podium-cds-color-grey-500);
 `;
 
 const ReviewContentContainer = styled.div`

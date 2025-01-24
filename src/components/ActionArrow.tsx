@@ -65,7 +65,7 @@ const SortArrow = styled.div.withConfig({
 `;
 
 export const ActionArrow = forwardRef<HTMLAnchorElement, SortArrowProps>(
-  ({ isUp, ...rest }, ref) => {
+  ({ isUp }) => {
     return <SortArrow isUp={isUp} />;
   }
 );

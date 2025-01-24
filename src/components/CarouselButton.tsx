@@ -40,7 +40,6 @@ const CarouselButtonContainer = styled.button.withConfig({
 `;
 
 const PREV: "prev" = "prev";
-const NEXT: "next" = "next";
 
 export const CarouselButton: React.FC<CarouselButtonProps> = ({
   type,

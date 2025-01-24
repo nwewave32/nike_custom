@@ -14,7 +14,7 @@ const CardContainer = styled.div`
 
 const ProdudctImg = styled.img`
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
 `;
 
 const ProductDesc = styled.div`
@@ -29,12 +29,12 @@ const ProductFeat = styled.p`
 `;
 const ProductName = styled.h3`
   line-height: 1.5em;
-  color: #111111;
+  color: var(--podium-cds-color-black);
   font: var(--podium-cds-typography-body1-strong);
 `;
 const ProductCategory = styled.p`
   line-height: 1.5em;
-  color: #707072;
+  color: var(--podium-cds-color-grey-500);
   font-size: 16px;
 `;
 const ProductColor = styled.p`
@@ -42,7 +42,7 @@ const ProductColor = styled.p`
   padding-bottom: 10px;
   font: var(--podium-cds-typography-body1);
   font-size: 16px;
-  color: #707072;
+  color: var(--podium-cds-color-grey-500);
 `;
 const ProductPrice = styled.h3`
   vertical-align: top;

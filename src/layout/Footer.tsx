@@ -53,7 +53,7 @@ const FooterSpace = styled.div.withConfig({
 `;
 
 const FooterSpacer = forwardRef<HTMLDivElement, FooterSpacerProps>(
-  ({ margin, border, ...rest }, ref) => {
+  ({ margin, border, ...rest }) => {
     return <FooterSpace margin={margin} border={border} {...rest} />;
   }
 );
@@ -169,7 +169,7 @@ const Footer: React.FC = () => {
           "위치정보이용약관",
           "영상정보처리기기 운영 방침",
         ].map((item) => (
-          <a data-testid="link" href="#" key={item}>
+          <a data-testid="link" href="/test" key={item}>
             <SubFooterSpan>{item}</SubFooterSpan>
           </a>
         ))}
@@ -190,7 +190,7 @@ const Footer: React.FC = () => {
               data-var="koreanBusinessInfoLink"
               target="_blank"
               data-testid="link"
-              href="#"
+              href="/test"
             >
               사업자 정보 확인
             </LegalFooterAnchor>
@@ -201,7 +201,7 @@ const Footer: React.FC = () => {
               <LegalFooterAnchor
                 data-var="koreanCustomerServicePhone"
                 data-testid="link"
-                href="#"
+                href="/test"
               >
                 080-022-0182
               </LegalFooterAnchor>

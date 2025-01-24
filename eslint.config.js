@@ -31,6 +31,10 @@ export default tseslint.config(
           ignore: ["args", "object", "position", "intensity"],
         },
       ],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { vars: "all", args: "after-used", ignoreRestSiblings: true },
+      ],
     },
   }
 );

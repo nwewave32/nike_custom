@@ -10,8 +10,9 @@ interface AccordionProps {
 }
 
 const AccordionContainer = styled(FlexBox)`
-  box-shadow: inset 0 -1px 0 0 var(--podium-cds-grey-300, #e5e5e5);
-  color: #111;
+  box-shadow: inset 0 -1px 0 0
+    var(--podium-cds-grey-300, var(--podium-cds-color-grey-200));
+  color: var(--podium-cds-color-black);
   --animation-duration: 250ms;
 `;
 
@@ -46,7 +47,7 @@ const AccordionContentWrapper = styled(FlexBox)`
 `;
 
 export const Accordion = forwardRef<HTMLAnchorElement, AccordionProps>(
-  ({ title, children, score, ...rest }, ref) => {
+  ({ title, children, score }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <AccordionContainer direction="column" align="flex-start">

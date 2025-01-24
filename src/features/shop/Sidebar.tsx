@@ -98,7 +98,6 @@ const FilterMenu: React.FC<FilterMenuProps> = ({ filter, setFilters }) => {
                     item={item.name}
                     isSelected={item.isSelected}
                     onClick={() => {
-                      console.log("##??", item);
                       handleChange(filter.name, item.id);
                     }}
                   />
@@ -117,7 +116,7 @@ const FilterMenu: React.FC<FilterMenuProps> = ({ filter, setFilters }) => {
         ) : (
           <>
             <ColorGrid>
-              {filter.items.map((item, index) => (
+              {filter.items.map((item) => (
                 <ColorWrapper
                   key={item?.name}
                   direction="column"
@@ -179,7 +178,7 @@ const Categories = styled(FlexBox)`
 
 const CategoryItem = styled(FlexBox)`
   cursor: pointer;
-  color: #111111;
+  color: var(--podium-cds-color-black);
   font-weight: 500;
   white-space: normal;
   word-wrap: break-word;
@@ -194,7 +193,7 @@ const Filters = styled(FlexBox)`
 
 const FilterMenuWrapper = styled(FlexBox)`
   width: 100%;
-  border-top: solid 1px #e5e5e5;
+  border-top: solid 1px var(--podium-cds-color-grey-200);
 `;
 
 const FilterTitle = styled(FlexBox)`
@@ -228,7 +227,7 @@ const ColorPallete = styled.div`
   ${({ color }) =>
     color === "#fff"
       ? css`
-          border: 1px solid #e5e5e5;
+          border: 1px solid var(--podium-cds-color-grey-200);
         `
       : color === "multi"
         ? css`

@@ -20,7 +20,7 @@ const WallHeader = styled(FlexBox)`
   position: sticky;
   top: 0;
   z-index: 9;
-  background-color: #fff;
+  background-color: var(--podium-cds-color-white);
 `;
 
 const WallTitle = styled.h1`
@@ -49,7 +49,7 @@ const SortSelect = styled(FlexBox)`
   top: 24px;
   right: 0;
   padding: 24px 28px 15px 0;
-  background-color: #fff;
+  background-color: var(--podium-cds-color-white);
   border-radius: 0px 0px 0px 20px;
 `;
 
@@ -84,13 +84,10 @@ function ShopPage() {
   const [filteredItems, setFilteredItems] = useState<Product[] | []>(gara);
 
   useEffect(() => {
-    console.log("##selectedFilters", selectedFilters);
-
     const prices = selectedFilters.price.items.filter(
       (item) => item.isSelected
     );
 
-    console.log("##prices", prices);
     setFilteredItems(() => {
       let temp: Product[] = [];
       if (prices.length === 0) return gara;

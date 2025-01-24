@@ -11,7 +11,7 @@ const ReviewStarWrapper = styled(FlexBox)`
 `;
 
 export const StarScore = forwardRef<HTMLAnchorElement, StarScoreProps>(
-  ({ score, ...rest }, ref) => {
+  ({ score }) => {
     return (
       <ReviewStarWrapper>
         {Array(5)
@@ -20,7 +20,7 @@ export const StarScore = forwardRef<HTMLAnchorElement, StarScoreProps>(
             const isFill = idx < score;
             return (
               <svg
-                key={"star" + idx + 1}
+                key={"star" + idx + 1 + el}
                 aria-hidden="true"
                 focusable="false"
                 viewBox="0 0 24 24"

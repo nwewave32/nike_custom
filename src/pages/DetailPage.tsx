@@ -61,7 +61,7 @@ const Thumbnail = styled.img`
   position: relative;
   height: 60px;
   width: 60px;
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
   border-radius: 4px;
   cursor: pointer;
 `;
@@ -86,7 +86,7 @@ const HeroImageWrapper = styled.div`
 
 const HeroImage = styled.img`
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
 
   position: absolute;
   top: 0;
@@ -122,7 +122,7 @@ const ProductTitle = styled.h1`
 
 const ProductSubTitle = styled.h2`
   font: var(--podium-cds-typography-body1);
-  color: #707072;
+  color: var(--podium-cds-color-grey-500);
   text-align: start;
 `;
 

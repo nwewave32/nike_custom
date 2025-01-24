@@ -52,10 +52,8 @@ const CheckWrapper = styled.div.withConfig({
   }
 `;
 
-export const Check = forwardRef<HTMLAnchorElement, CheckProps>(
-  ({ color, ...rest }, ref) => {
-    return <CheckWrapper color={color} />;
-  }
-);
+export const Check = forwardRef<HTMLAnchorElement, CheckProps>(({ color }) => {
+  return <CheckWrapper color={color} />;
+});
 
 export default Check;

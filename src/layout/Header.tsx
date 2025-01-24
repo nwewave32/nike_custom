@@ -33,7 +33,7 @@ const HeaderWrapper = styled.header.withConfig({
   box-sizing: border-box;
 
   padding: 0 48px; //todo: responsive
-  background-color: #fff;
+  background-color: var(--podium-cds-color-white);
   ${transition};
 `;
 
@@ -423,7 +423,7 @@ const HoverContainer = styled.div`
 
 const HoverNav = styled(FlexBox)`
   width: 100vw;
-  background-color: #fff;
+  background-color: var(--podium-cds-color-white);
   gap: 12px;
   padding-top: 30px;
 `;
@@ -681,7 +681,7 @@ const Header: React.FC = () => {
 const TopBarContainer = styled(FlexBox)`
   width: 100vw;
   padding: 0 48px; //todo: responsive
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
 `;
 const UserMenuWrapper = styled(FlexBox)``;
 const UserMenuLi = styled.li`

@@ -31,7 +31,7 @@ const FindStoreButton = styled.button`
 `;
 
 const FindStoreDesc = styled.div`
-  color: #707072;
+  color: var(--podium-cds-color-grey-500);
 
   margin-top: 20px;
 

@@ -31,7 +31,7 @@ const CheckBox = styled.div.withConfig({
   width: 20px;
   height: 20px;
   vertical-align: top;
-  border: solid 1px #707072;
+  border: solid 1px var(--podium-cds-color-grey-500);
   border-radius: 4px;
   margin-right: 6px;
   display: inline-block;
@@ -40,15 +40,15 @@ const CheckBox = styled.div.withConfig({
   ${({ isSelected }) =>
     isSelected &&
     css`
-      border-color: #111111;
-      background: #111111;
+      border-color: var(--podium-cds-color-black);
+      background: var(--podium-cds-color-black);
     `}
 `;
 
 export const ListItemComponent = forwardRef<
   HTMLAnchorElement,
   ListItemComponentProps
->(({ children, item, type, isSelected, onClick, ...rest }, ref) => {
+>(({ children, item, type, isSelected, onClick, ...rest }) => {
   return (
     <ListItemComponentContainer onClick={onClick} {...rest}>
       <CheckBox isSelected={isSelected}>

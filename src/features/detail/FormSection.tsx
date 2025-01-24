@@ -42,7 +42,7 @@ const shouldForwardProp = (prop: string) =>
 const PickerItem = styled.img.withConfig({
   shouldForwardProp,
 })<PickerItemProps>`
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
   min-width: 70px;
   min-height: 70px;
   width: 70px;
@@ -56,13 +56,13 @@ const PickerItem = styled.img.withConfig({
     `}
 
   &:hover {
-    border: 1px solid #111;
+    border: 1px solid var(--podium-cds-color-black);
     border-radius: 5px;
   }
   ${({ isSelected }) =>
     isSelected &&
     css`
-      border: 1px solid #111;
+      border: 1px solid var(--podium-cds-color-black);
       border-radius: 5px;
     `}
 `;
@@ -89,7 +89,7 @@ const SoldOutSvg = styled.svg`
 const SoldOutLine = styled.line`
   z-index: 3;
   shape-rendering: crispEdges;
-  stroke: #ffffff;
+  stroke: var(--podium-cds-color-white);
   strokewidth: 1.5px;
 `;
 
@@ -136,7 +136,7 @@ const ProductSizeItem = styled(FlexBox).withConfig({
   grid-column: span 1;
   -webkit-box-align: center;
   align-items: center;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--podium-cds-color-grey-200);
   border-radius: 4px;
   display: flex;
   height: 48px;
@@ -145,9 +145,10 @@ const ProductSizeItem = styled(FlexBox).withConfig({
   cursor: pointer;
 
   &:hover {
-    border: 1px solid #111;
+    border: 1px solid var(--podium-cds-color-black);
   }
-  ${({ isSelected }) => isSelected && `border: 1px solid #111;`}
+  ${({ isSelected }) =>
+    isSelected && `border: 1px solid var(--podium-cds-color-black);`}
 `;
 
 const ButtonWrapper = styled(FlexBox)`
@@ -163,9 +164,9 @@ const CustomButton = styled(LinkButton)`
   ${({ mode }) =>
     mode === "dark" &&
     css`
-      border: 1.5px solid #cacacb;
+      border: 1.5px solid var(--podium-cds-color-grey-300);
       &:hover {
-        border: 1.5px solid #111;
+        border: 1.5px solid var(--podium-cds-color-black);
         background-color: ${colorSet.primaryOnDark};
       }
     `};
@@ -202,7 +203,7 @@ function FormSection({ item, selectedSort, onClick }: FormSectionProps) {
       <ProductPrice>{formatPrice(item.price)}</ProductPrice>
       <ProductColorContainer>
         <PickerWrapper>
-          {item.sort.map((item, idx) => (
+          {item.sort.map((item) => (
             <PickerItemWrapper key={item.name}>
               <PickerItem
                 isSelected={selectedSort ? item.id === selectedSort.id : false}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import FlexBox from "./FlexBox";
 
@@ -6,22 +6,22 @@ const SearchBarWrapper = styled(FlexBox)`
   width: 180px;
   -webkit-transition: width 400ms cubic-bezier(0.6, 0, 0.1, 1);
   transition: width 400ms cubic-bezier(0.6, 0, 0.1, 1);
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
   border-radius: 24px;
   box-sizing: border-box;
   overflow: hidden;
   &:hover {
-    background-color: #e5e5e5;
+    background-color: var(--podium-cds-color-grey-200);
   }
 `;
 
 const SearchStartIcon = styled.div`
-  background-color: #f5f5f5;
+  background-color: var(--podium-cds-color-grey-100);
   border-radius: 100%;
   width: 36px;
   height: 36px;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: var(--podium-cds-color-grey-100);
   }
 `;
 const SearchButton = styled.button`
@@ -55,21 +55,21 @@ const SearchInput = styled.input`
     "맑은 고딕",
     sans-serif;
   &:hover {
-    background-color: #e5e5e5;
+    background-color: var(--podium-cds-color-grey-200);
   }
 `;
 
-const FullSearchContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-`;
+// const FullSearchContainer = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+// `;
 
 const SearchBar: React.FC = () => {
   const [inputValue, setInputValue] = React.useState<string>("");
-  const [isSearchCoverShow, setIsSearchCoverShow] = useState(false);
+  // const [isSearchCoverShow, setIsSearchCoverShow] = useState(false);
 
   return (
     <>
@@ -110,7 +110,7 @@ const SearchBar: React.FC = () => {
           aria-label="상품 검색"
           inputMode="search"
         />
-        {isSearchCoverShow && (
+        {/* {isSearchCoverShow && (
           <FullSearchContainer>
             <SearchBarWrapper>
               <SearchStartIcon>
@@ -148,7 +148,7 @@ const SearchBar: React.FC = () => {
               />
             </SearchBarWrapper>
           </FullSearchContainer>
-        )}
+        )} */}
         {/* <div class="search-end-icon-container">
                     <button aria-label="검색 초기화" class="nds-btn nds-button--icon-only search-end-btn css-1pto8ls ex41m6f0 btn-secondary-dark " type="button" id="nav-search-end-icon">
                         <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none"><path stroke="currentColor" strokeWidth="1.5" d="M18.973 5.027L5.028 18.972m0-13.945l13.944 13.945">

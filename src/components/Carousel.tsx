@@ -112,8 +112,6 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
     const type = e.currentTarget.getAttribute("type");
     const container = scrollRef.current;
     if (container) {
-      console.log("##scrollAmount", scrollAmount);
-
       if (type === PREV) {
         container.scrollTo({
           left: Math.max(container.scrollLeft - scrollAmount, 0),
@@ -135,7 +133,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
     const container = scrollRef.current;
     if (container) {
       const left = container.scrollLeft;
-      console.log("##ScrollContainer ScrollLeft:", left);
+
       //자석처럼 특정 지점으로 이동하도록
       // container.scrollTo({
       //   left: Math.min(
@@ -186,7 +184,7 @@ export const Carousel: React.FC<CarouselProps> = ({ images, title }) => {
                   <LinkButton
                     mode="dark"
                     text={image?.buttonTitle ? image.buttonTitle : "구매하기"}
-                    href="#"
+                    href="/shop"
                   />
                 </ButtonWrapper>
               </DescWrapper>
