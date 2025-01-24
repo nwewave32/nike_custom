@@ -527,7 +527,7 @@ const HoverNavComponent: React.FC<HoverNavComponentProps> = ({
                 align="flex-start"
               >
                 <MenuTitle>{colItem.title}</MenuTitle>
-                {colItem.arr?.map((menu, idx) => (
+                {colItem.arr?.map((menu) => (
                   <MenuAnchor key={`${menu} (${hoverItem})`} to="/shop">
                     {menu}
                   </MenuAnchor>

@@ -68,11 +68,6 @@ const ResultBody = styled(FlexBox)`
   height: auto;
 `;
 
-const GridProduct = styled(FlexBox)`
-  width: 100%;
-  min-height: 500px;
-`;
-
 function ShopPage() {
   const [isFilterShow, setIsFilterShow] = useState(true);
   const sortItems = ["추천순", "최신순", "높은 가격순", "낮은 가격순"];
