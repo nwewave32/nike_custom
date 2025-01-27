@@ -1,40 +1,29 @@
 import { Center, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import FlexBox from "components/FlexBox";
+import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { SwooshSvg } from "styles/GlobalStyle";
 
 const heartbeat = () => keyframes`
 from {
-    -webkit-transform: translateX(-50%) scale(1);
             transform: translateX(-50%) scale(1);
-    -webkit-transform-origin: center center;
             transform-origin: center center;
-    -webkit-animation-timing-function: ease-out;
             animation-timing-function: ease-out;
   }
   10% {
-    -webkit-transform: translateX(-50%) scale(0.91);
             transform: translateX(-50%) scale(0.91);
-    -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
   }
   17% {
-    -webkit-transform: translateX(-50%) scale(0.98);
             transform: translateX(-50%) scale(0.98);
-    -webkit-animation-timing-function: ease-out;
             animation-timing-function: ease-out;
   }
   33% {
-    -webkit-transform: translateX(-50%) scale(0.87);
             transform: translateX(-50%) scale(0.87);
-    -webkit-animation-timing-function: ease-in;
             animation-timing-function: ease-in;
   }
   45% {
-    -webkit-transform: translateX(-50%) scale(1);
             transform: translateX(-50%) scale(1);
-    -webkit-animation-timing-function: ease-out;
             animation-timing-function: ease-out;
   }
   100% {
@@ -42,7 +31,15 @@ from {
   }
 `;
 
-const Toast = styled.div`
+interface ToastProps {
+  visible: boolean;
+}
+
+const shouldForwardProps = (prop: string) => prop !== "visible";
+
+const Toast = styled.div.withConfig({
+  shouldForwardProp: shouldForwardProps,
+})<ToastProps>`
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -52,9 +49,8 @@ const Toast = styled.div`
   background-color: #000;
   border-radius: 10px;
   opacity: 0.3;
-
-  -webkit-animation: ${heartbeat} 1.5s ease-in-out 3 both;
-  animation: ${heartbeat} 1.5s ease-in-out 3 both;
+  z-index: 9999;
+  animation: ${({ visible }) => visible && heartbeat} 2.5s ease-in-out 3 both;
 `;
 const NikeBackground = styled.div`
   width: 100%;
@@ -62,6 +58,19 @@ const NikeBackground = styled.div`
   background-color: var(--podium-cds-color-grey-100);
   position: absolute;
   top: 0;
+`;
+const LogoSvg = styled.svg`
+  height: 100%;
+  width: 100%;
+`;
+
+const Credit = styled.a`
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  cursor: pointer;
 `;
 
 function Model() {
@@ -75,6 +84,20 @@ function Model() {
 }
 
 function ThreeCanvas() {
+  const [visible, setIsVisible] = useState(false);
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 1.0 } // Adjust threshold as needed
+    );
+
+    if (canvasRef.current) observer.observe(canvasRef.current);
+    return () => {
+      if (canvasRef.current) observer.unobserve(canvasRef.current);
+    };
+  }, []);
+
   return (
     <FlexBox
       justify="center"
@@ -87,8 +110,8 @@ function ThreeCanvas() {
           height: "500px",
         }}
       >
-        <NikeBackground>
-          <SwooshSvg
+        <NikeBackground ref={canvasRef}>
+          <LogoSvg
             aria-hidden="true"
             focusable="false"
             viewBox="0 0 24 24"
@@ -103,9 +126,12 @@ function ThreeCanvas() {
               d="M21 8.719L7.836 14.303C6.74 14.768 5.818 15 5.075 15c-.836 0-1.445-.295-1.819-.884-.485-.76-.273-1.982.559-3.272.494-.754 1.122-1.446 1.734-2.108-.144.234-1.415 2.349-.025 3.345.275.2.666.298 1.147.298.386 0 .829-.063 1.316-.19L21 8.719z"
               clipRule="evenodd"
             ></path>
-          </SwooshSvg>
+          </LogoSvg>
         </NikeBackground>
-        <Toast>화면을 드래그/스크롤 해보세요!</Toast>
+        <Toast visible={visible}>화면을 드래그/스크롤 해보세요!</Toast>
+        <Credit href="https://sketchfab.com/colleywolly">
+          3D Model by <span>3D Sneakers</span>
+        </Credit>
         <Canvas camera={{ position: [-20, 20, -20], fov: 50 }}>
           <ambientLight intensity={0.5} />
 
